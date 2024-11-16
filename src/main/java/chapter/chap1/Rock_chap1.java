@@ -1,33 +1,29 @@
-package banje.ban;
+package chapter.chap1;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
-public class Rock_chap2 {
-    final int TypeSize = 12;
-    final int scale = 10;
-    final int tileSize = TypeSize * scale;
-    final int maxScreenCol = 8;
-    final int maxScreenRow = 7;
-    final int ScreenWidth = tileSize * maxScreenCol;
-    final int ScreenHeight = tileSize * maxScreenRow;   
+public class Rock_chap1 {
+    public final int ScreenHeight =750;
+    public final int ScreenWidth = 750;
     public int x; 
     public int y;  
     public int preX = x, preY = y;
+    private final int tileSize = 25;
     Rectangle rect;
-    public Rock_chap2(int x, int y) {
-        this.x = x * tileSize;
-        this.y = y * tileSize;
+    public Rock_chap1(int x, int y) {
+        this.x = x;
+        this.y = y;
         this.preX = this.x; // Khởi tạo preX
         this.preY = this.y; // Khởi tạo preY
         rect = new Rectangle(this.x, this.y, tileSize, tileSize); // Khởi tạo Rectangle
     }
     // Phương thức để vẽ nhân vật Rock
     public void draw(Graphics g) {
-        g.setColor(Color.white);  // Đặt màu trắng
-        g.fillOval(x, y, tileSize, tileSize);  // Vẽ hình tròn tại vị trí (x, y)
+        g.setColor(Color.red); 
+        g.fillOval(x, y, 50 , 50 );  // Vẽ hình tròn tại vị trí (x, y)
     }
     public boolean vaCham(Rectangle rectA) {
         if (rectA.intersects(rect)) return true;

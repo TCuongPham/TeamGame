@@ -1,7 +1,8 @@
-
-package banje.ban;
+package game;
 
 import javax.swing.JFrame;
+import chapter.chap1.*;
+import chapter.chap3.*;
 
 public class MAIN implements Runnable {
     public static boolean kiemTra = false;
@@ -9,7 +10,7 @@ public class MAIN implements Runnable {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game với Background");
         GamePanel_chap1 chapter1 = new GamePanel_chap1();
-        GamePanel_chap2 chapter2 = new GamePanel_chap2();
+        GamePanel_chap3 chapter2 = new GamePanel_chap3();
 
         frame.add(chapter2);
         frame.pack();
@@ -25,12 +26,12 @@ public class MAIN implements Runnable {
 
     private JFrame frame;
     private GamePanel_chap1 chapter1;
-    private GamePanel_chap2 chapter2;
+    private GamePanel_chap3 chapter3;
 
-    public MAIN(JFrame frame, GamePanel_chap1 chapter1, GamePanel_chap2 chapter2) {
+    public MAIN(JFrame frame, GamePanel_chap1 chapter1, GamePanel_chap3 chapter3) {
         this.frame = frame;
         this.chapter1 = chapter1;
-        this.chapter2 = chapter2;
+        this.chapter3 = chapter3;
     }
 
     @Override
