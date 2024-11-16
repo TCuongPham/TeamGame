@@ -1,4 +1,4 @@
-package banje.ban;
+package chapter.chap3;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel_chap2 extends JPanel implements KeyListener {
+public class GamePanel_chap3 extends JPanel implements KeyListener {
     // Screen setting
     public int check = 0;
     final int TypeSize = 12;
@@ -34,15 +34,15 @@ public class GamePanel_chap2 extends JPanel implements KeyListener {
     Rectangle rect6 = new Rectangle(7 * tileSize, 2 * tileSize, 1 * tileSize, 3 * tileSize);
     
     Rectangle rectA = new Rectangle(x, y, tileSize, tileSize);
-    Rock_chap2[] r = {
-    new Rock_chap2(4, 1),
-    new Rock_chap2(5, 2),
-    new Rock_chap2(2, 4),
-    new Rock_chap2(2, 5),
-    new Rock_chap2(5, 4),
-    new Rock_chap2(4, 5)
+    Rock_chap3[] r = {
+    new Rock_chap3(4, 1),
+    new Rock_chap3(5, 2),
+    new Rock_chap3(2, 4),
+    new Rock_chap3(2, 5),
+    new Rock_chap3(5, 4),
+    new Rock_chap3(4, 5)
 };
-    public GamePanel_chap2() {
+    public GamePanel_chap3() {
         
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
         this.setBackground(Color.black);
@@ -118,7 +118,7 @@ public class GamePanel_chap2 extends JPanel implements KeyListener {
         rectA.setLocation(x, y);
         if (x == 7 * tileSize && y == 5 * tileSize) {
             System.out.print("YOU WIN\n");
-            MAIN.kiemTra = true;
+            game.MAIN.kiemTra = true;
             check = 1;
         }
         // Kiểm tra va chạm sau khi di chuyển

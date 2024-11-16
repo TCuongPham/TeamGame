@@ -1,4 +1,4 @@
-package banje.ban;
+package chapter.chap1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     Rectangle hcnTest;
     Area polyArea;
     Area rectArea;
-    Rock r1 = new Rock(DefaultX, DefaultY);
+    Rock_chap1 r1 = new Rock_chap1(DefaultX, DefaultY);
 
     Thread thread;
     public GamePanel_chap1(){
