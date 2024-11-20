@@ -12,13 +12,14 @@ public class Rock_chap1 {
     public int y;  
     public int preX = x, preY = y;
     private final int tileSize = 25;
+    private final int speed = 20;
     Rectangle rect;
     public Rock_chap1(int x, int y) {
         this.x = x;
         this.y = y;
         this.preX = this.x; // Khởi tạo preX
         this.preY = this.y; // Khởi tạo preY
-        rect = new Rectangle(this.x, this.y, tileSize, tileSize); // Khởi tạo Rectangle
+        rect = new Rectangle(this.x, this.y + 75, tileSize, tileSize); // Khởi tạo Rectangle
     }
     // Phương thức để vẽ nhân vật Rock
     public void draw(Graphics g) {
@@ -37,34 +38,34 @@ public class Rock_chap1 {
         switch (key) {
             case KeyEvent.VK_LEFT:
                 if (x > 0) {
-                    x -= tileSize;  // Di chuyển sang trái
+                    x -= speed;  // Di chuyển sang trái
                 }
                 break;
             case KeyEvent.VK_RIGHT:
-                if (x < ScreenWidth - tileSize) {
-                    x += tileSize;  // Di chuyển sang phải
+                if (x < 883) {
+                    x += speed;  // Di chuyển sang phải
                 }
                 break;
             case KeyEvent.VK_UP:
                 if (y > 0) {
-                    y -= tileSize;  // Di chuyển lên trên
+                    y -= speed;  // Di chuyển lên trên
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (y < ScreenHeight - tileSize) {
-                    y += tileSize;  // Di chuyển xuống dưới
+                if (y < 743) {
+                    y += speed;  // Di chuyển xuống dưới
                 }
                 break;
         }
 
-        // Cập nhật vị trí của hình chữ nhật đại diện cho quân cờ
-        rect.setLocation(x, y);
+        // Cập nhật vị trí của hình chữ nhật
+        rect.setLocation(x, y + 50);
     }
 
     public void luiLai() {
         x = preX;
         y = preY;
-        rect.setLocation(x, y);
+        rect.setLocation(x, y + 50);
     }
     
 }
