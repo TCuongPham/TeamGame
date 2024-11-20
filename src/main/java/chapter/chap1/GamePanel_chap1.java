@@ -12,10 +12,10 @@ import java.awt.geom.Area;
 
 public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     private BufferedImage backgroundImage;
-    public final int ScreenHeight =750;
-    public final int ScreenWidth = 750;
+    public final int ScreenHeight =840;
+    public final int ScreenWidth = 960;
     private final int tileSize = 25;
-    private int cameraX = 1600; // Tọa độ X của camera
+    private int cameraX = 1400; // Tọa độ X của camera
     private int cameraY = 900; // Tọa độ Y của camera
     private int preCamX = cameraX;
     private int preCamY = cameraY;
@@ -27,7 +27,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     Area polyArea;
     Area rectArea;
     Rock_chap1 r1 = new Rock_chap1(DefaultX, DefaultY);
-
+    Animation animation;
     Thread thread;
     public GamePanel_chap1(){
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
@@ -41,7 +41,8 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
         this.addKeyListener(this);
         thread = new Thread(this);
         thread.start();
-        
+        animation = new Animation();
+        animation.getImage();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
             );
         }
         r1.draw(g);
-
+        animation.operation(g, r1.x, r1.y);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
                 }
                 break;
             case KeyEvent.VK_RIGHT:
-                if (cameraX < backgroundImage.getWidth() - ScreenWidth && r1.x == DefaultX) {
+                if (cameraX < backgroundImage.getWidth() - ScreenWidth - tileSize && r1.x == DefaultX) {
                     cameraX += tileSize;  // Di chuyển sang phải
                 }
                 else {
@@ -102,7 +103,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (cameraY < backgroundImage.getHeight() - ScreenHeight && r1.y == DefaultY) {
+                if (cameraY < backgroundImage.getHeight() - ScreenHeight - tileSize && r1.y == DefaultY) {
                     cameraY += tileSize;  // Di chuyển xuống dưới
                 }
                 else {
@@ -123,7 +124,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
         polyArea = new Area(poly);
         rectArea = new Area(r1.rect);
         polyArea.intersect(rectArea);
-        if (r1.vaCham(hcnTest) || !polyArea.isEmpty()) {
+        if (r1.vaCham(hcnTest) || !polyArea.isEmpty() || r1.x > 908 || r1.y > 793 || r1.x < 33 ) {
             r1.luiLai();
             cameraX = preCamX;
             cameraY = preCamY;

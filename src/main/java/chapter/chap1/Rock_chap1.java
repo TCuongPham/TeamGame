@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 public class Rock_chap1 {
-    public final int ScreenHeight =750;
-    public final int ScreenWidth = 750;
+    public final int ScreenHeight =840;
+    public final int ScreenWidth = 960;
     public int x; 
     public int y;  
     public int preX = x, preY = y;
