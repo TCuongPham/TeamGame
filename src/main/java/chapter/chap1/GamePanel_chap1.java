@@ -15,6 +15,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     public final int ScreenHeight =840;
     public final int ScreenWidth = 960;
     private final int tileSize = 25;
+    private final int speed = 20;
     private int cameraX = 1400; // Tọa độ X của camera
     private int cameraY = 900; // Tọa độ Y của camera
     private int preCamX = cameraX;
@@ -96,7 +97,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
         switch (key) {
             case KeyEvent.VK_LEFT:
                 if (cameraX > tileSize && r1.x == DefaultX) {
-                    cameraX -= tileSize;  // Di chuyển sang trái
+                    cameraX -= speed;  // Di chuyển sang trái
                 }
                 else {
                     r1.diChuyen(key);
@@ -104,7 +105,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
                 break;
             case KeyEvent.VK_RIGHT:
                 if (cameraX < backgroundImage.getWidth() - ScreenWidth - tileSize && r1.x == DefaultX) {
-                    cameraX += tileSize;  // Di chuyển sang phải
+                    cameraX += speed;  // Di chuyển sang phải
                 }
                 else {
                     r1.diChuyen(key);
@@ -112,7 +113,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
                 break;
             case KeyEvent.VK_UP:
                 if (cameraY > tileSize && r1.y == DefaultY) {
-                    cameraY -= tileSize;  // Di chuyển lên trên
+                    cameraY -= speed;  // Di chuyển lên trên
                 }
                 else {
                     r1.diChuyen(key);
@@ -120,7 +121,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
                 break;
             case KeyEvent.VK_DOWN:
                 if (cameraY < backgroundImage.getHeight() - ScreenHeight - tileSize && r1.y == DefaultY) {
-                    cameraY += tileSize;  // Di chuyển xuống dưới
+                    cameraY += speed;  // Di chuyển xuống dưới
                 }
                 else {
                     r1.diChuyen(key);

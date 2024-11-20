@@ -12,6 +12,7 @@ public class Rock_chap1 {
     public int y;  
     public int preX = x, preY = y;
     private final int tileSize = 25;
+    private final int speed = 20;
     Rectangle rect;
     public Rock_chap1(int x, int y) {
         this.x = x;
@@ -37,22 +38,22 @@ public class Rock_chap1 {
         switch (key) {
             case KeyEvent.VK_LEFT:
                 if (x > 0) {
-                    x -= tileSize;  // Di chuyển sang trái
+                    x -= speed;  // Di chuyển sang trái
                 }
                 break;
             case KeyEvent.VK_RIGHT:
                 if (x < 883) {
-                    x += tileSize;  // Di chuyển sang phải
+                    x += speed;  // Di chuyển sang phải
                 }
                 break;
             case KeyEvent.VK_UP:
                 if (y > 0) {
-                    y -= tileSize;  // Di chuyển lên trên
+                    y -= speed;  // Di chuyển lên trên
                 }
                 break;
             case KeyEvent.VK_DOWN:
                 if (y < 743) {
-                    y += tileSize;  // Di chuyển xuống dưới
+                    y += speed;  // Di chuyển xuống dưới
                 }
                 break;
         }
