@@ -71,7 +71,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
         }
         g.setColor(Color.BLUE);
         g.fillOval(2438 - cameraX ,2118 - cameraY, 50, 50);
-        Girl_Rec = new Rectangle(2438 - cameraX ,2118 - cameraY, 100, 100);
+        Girl_Rec = new Rectangle(2340 - cameraX ,2118 - cameraY, 200, 100);
         if (key == -1) {
             if (stand == 'f') STAND_FRONT.operation(g, r1.x, r1.y);
             else if (stand == 'b') STAND_BACK.operation(g, r1.x, r1.y);
@@ -163,6 +163,9 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
             preCamY = cameraY;
             r1.preX = r1.x;
             r1.preY = r1.y;
+        }
+        if (r1.vaCham(Girl_Rec)) {
+            System.out.println("Gai gai gai");
         }
         repaint(); // Vẽ lại sau khi di chuyển camera
     }
