@@ -8,17 +8,18 @@ import javax.imageio.ImageIO;
 
 public class Animation {
     BufferedImage [] listImages = new BufferedImage[4];
-    public String nameOfList = "character_move_down";
+    public String nameOfList;
+    public int ImageCount;
     public int tileSize = 25;
-    public Animation() {};
+    public Animation(String s, int n) {this.nameOfList = s; this.ImageCount = n;};
     int index = 0;
-    double one_loop_time = 1.0 / (30.0 / 4);
+    double one_loop_time = 0.1;
     double pre_loop_time = -1.0;
     double start_time;
     public String state = "run";
     boolean Switch = true;
     public void getImage() {
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= ImageCount; i++) {
             try {
                 listImages[i-1] = ImageIO.read(new File("pic/" + nameOfList + " ("+ i +")" + ".png"));
             } catch (IOException e) {
@@ -31,7 +32,7 @@ public class Animation {
 
         if((System.currentTimeMillis() - pre_loop_time) / 1000 > one_loop_time)  {
             pre_loop_time = System.currentTimeMillis();
-            if(index == listImages.length - 1)
+            if(index == ImageCount - 1)
                 index = 0;
             else
                 index += 1;
@@ -51,6 +52,6 @@ public class Animation {
             pre_loop_time = System.currentTimeMillis();
         }
         update();
-        graphics.drawImage(listImages[index], x, y, tileSize, tileSize, null);
+        graphics.drawImage(listImages[index], x, y, tileSize * 4, tileSize * 4, null);
     }
 }

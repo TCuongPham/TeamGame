@@ -18,7 +18,7 @@ public class Rock_chap1 {
         this.y = y;
         this.preX = this.x; // Khởi tạo preX
         this.preY = this.y; // Khởi tạo preY
-        rect = new Rectangle(this.x, this.y, tileSize, tileSize); // Khởi tạo Rectangle
+        rect = new Rectangle(this.x, this.y + 75, tileSize, tileSize); // Khởi tạo Rectangle
     }
     // Phương thức để vẽ nhân vật Rock
     public void draw(Graphics g) {
@@ -41,7 +41,7 @@ public class Rock_chap1 {
                 }
                 break;
             case KeyEvent.VK_RIGHT:
-                if (x < ScreenWidth - tileSize) {
+                if (x < 883) {
                     x += tileSize;  // Di chuyển sang phải
                 }
                 break;
@@ -51,20 +51,20 @@ public class Rock_chap1 {
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (y < ScreenHeight - tileSize) {
+                if (y < 743) {
                     y += tileSize;  // Di chuyển xuống dưới
                 }
                 break;
         }
 
-        // Cập nhật vị trí của hình chữ nhật đại diện cho quân cờ
-        rect.setLocation(x, y);
+        // Cập nhật vị trí của hình chữ nhật
+        rect.setLocation(x, y + 50);
     }
 
     public void luiLai() {
         x = preX;
         y = preY;
-        rect.setLocation(x, y);
+        rect.setLocation(x, y + 50);
     }
     
 }

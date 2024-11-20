@@ -23,11 +23,12 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     private int BGHeight = 2347;
     private int DefaultX = ScreenHeight / 2 - tileSize / 2;
     private int DefaultY = ScreenWidth / 2 - tileSize / 2;
-    Rectangle hcnTest;
+    private int key = -1;
+    Rectangle hcnTest, Girl_Rec;
     Area polyArea;
     Area rectArea;
     Rock_chap1 r1 = new Rock_chap1(DefaultX, DefaultY);
-    Animation animation;
+    Animation UP, DOWN, LEFT, RIGHT, STAND_FRONT, STAND_BACK, STAND_LEFT, STAND_RIGHT;
     Thread thread;
     public GamePanel_chap1(){
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
@@ -41,13 +42,22 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
         this.addKeyListener(this);
         thread = new Thread(this);
         thread.start();
-        animation = new Animation();
-        animation.getImage();
+        UP = new Animation("character_move_up", 4);
+        DOWN = new Animation("character_move_down", 4);
+        LEFT = new Animation("character_move_left", 4);
+        RIGHT = new Animation("character_move_right", 4);
+        STAND_FRONT = new Animation("character_stand_front", 3);
+        STAND_BACK = new Animation("character_stand_back", 3);
+        STAND_LEFT = new Animation("character_stand_left", 3);
+        STAND_RIGHT = new Animation("character_stand_right", 3);
+        UP.getImage(); DOWN.getImage(); LEFT.getImage(); RIGHT.getImage();
+        STAND_RIGHT.getImage(); STAND_BACK.getImage(); STAND_LEFT.getImage(); STAND_FRONT.getImage();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        //System.out.println(r1.x + " " + r1.y + " " + cameraX + " "+ cameraY );
         if (backgroundImage != null) {
             // Cắt và vẽ một phần của ảnh nền
             g.drawImage(
@@ -57,8 +67,14 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
                 this
             );
         }
-        r1.draw(g);
-        animation.operation(g, r1.x, r1.y);
+        g.setColor(Color.BLUE);
+        g.fillOval(2438 - cameraX ,2118 - cameraY, 50, 50);
+        Girl_Rec = new Rectangle(2438 - cameraX ,2118 - cameraY, 100, 100);
+        if (key == -1) STAND_FRONT.operation(g, r1.x, r1.y);
+        else if (key == KeyEvent.VK_DOWN) DOWN.operation(g, r1.x, r1.y);
+        else if (key == KeyEvent.VK_UP) UP.operation(g, r1.x, r1.y);
+        else if (key == KeyEvent.VK_LEFT) LEFT.operation(g, r1.x, r1.y);
+        else if (key == KeyEvent.VK_RIGHT) RIGHT.operation(g, r1.x, r1.y);
     }
 
     @Override
@@ -75,7 +91,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
+        key = e.getKeyCode();
 
         switch (key) {
             case KeyEvent.VK_LEFT:
@@ -145,7 +161,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     }
     @Override
     public void keyReleased(KeyEvent e) {
-        
+        key = -1;
     }
     
 }
