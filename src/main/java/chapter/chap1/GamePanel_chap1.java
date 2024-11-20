@@ -25,6 +25,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     private int DefaultX = ScreenHeight / 2 - tileSize / 2;
     private int DefaultY = ScreenWidth / 2 - tileSize / 2;
     private int key = -1;
+    private char stand = 'f';
     Rectangle hcnTest, Girl_Rec;
     Area polyArea;
     Area rectArea;
@@ -71,7 +72,12 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
         g.setColor(Color.BLUE);
         g.fillOval(2438 - cameraX ,2118 - cameraY, 50, 50);
         Girl_Rec = new Rectangle(2438 - cameraX ,2118 - cameraY, 100, 100);
-        if (key == -1) STAND_FRONT.operation(g, r1.x, r1.y);
+        if (key == -1) {
+            if (stand == 'f') STAND_FRONT.operation(g, r1.x, r1.y);
+            else if (stand == 'b') STAND_BACK.operation(g, r1.x, r1.y);
+            else if (stand == 'l') STAND_LEFT.operation(g, r1.x, r1.y);
+            else if (stand == 'r') STAND_RIGHT.operation(g, r1.x, r1.y);
+        }
         else if (key == KeyEvent.VK_DOWN) DOWN.operation(g, r1.x, r1.y);
         else if (key == KeyEvent.VK_UP) UP.operation(g, r1.x, r1.y);
         else if (key == KeyEvent.VK_LEFT) LEFT.operation(g, r1.x, r1.y);
@@ -98,35 +104,41 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
             case KeyEvent.VK_LEFT:
                 if (cameraX > tileSize && r1.x == DefaultX) {
                     cameraX -= speed;  // Di chuyển sang trái
+                    stand = 'l';
                 }
                 else {
                     r1.diChuyen(key);
+                    stand = 'l';
                 }
                 break;
             case KeyEvent.VK_RIGHT:
                 if (cameraX < backgroundImage.getWidth() - ScreenWidth - tileSize && r1.x == DefaultX) {
                     cameraX += speed;  // Di chuyển sang phải
+                    stand = 'r';
                 }
                 else {
                     r1.diChuyen(key);
+                    stand = 'r';
                 }
                 break;
             case KeyEvent.VK_UP:
                 if (cameraY > tileSize && r1.y == DefaultY) {
                     cameraY -= speed;  // Di chuyển lên trên
+                    stand = 'b';
                 }
                 else {
                     r1.diChuyen(key);
+                    stand = 'b';
                 }
                 break;
             case KeyEvent.VK_DOWN:
                 if (cameraY < backgroundImage.getHeight() - ScreenHeight - tileSize && r1.y == DefaultY) {
                     cameraY += speed;  // Di chuyển xuống dưới
+                    stand = 'f';
                 }
                 else {
                     r1.diChuyen(key);
-                    preCamX = cameraX;
-                    preCamY = cameraY;
+                    stand = 'f';
                 }
                 break;
         }
