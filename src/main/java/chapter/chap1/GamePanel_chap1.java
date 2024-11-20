@@ -59,7 +59,6 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //System.out.println(r1.x + " " + r1.y + " " + cameraX + " "+ cameraY );
         if (backgroundImage != null) {
             // Cắt và vẽ một phần của ảnh nền
             g.drawImage(
