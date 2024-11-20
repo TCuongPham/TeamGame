@@ -2,8 +2,10 @@ package chapter.chap3;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class Rock_chap3 {
     final int TypeSize = 12;
@@ -25,9 +27,9 @@ public class Rock_chap3 {
         rect = new Rectangle(this.x, this.y, tileSize, tileSize); // Khởi tạo Rectangle
     }
     // Phương thức để vẽ nhân vật Rock
-    public void draw(Graphics g) {
+    public void draw(Graphics g, Image bikeImage ) {
         g.setColor(Color.white);  // Đặt màu trắng
-        g.fillOval(x, y, tileSize, tileSize);  // Vẽ hình tròn tại vị trí (x, y)
+        g.drawImage(bikeImage, x, y, null);  // Vẽ hình tròn tại vị trí (x, y)
     }
     public boolean vaCham(Rectangle rectA) {
         if (rectA.intersects(rect)) return true;
