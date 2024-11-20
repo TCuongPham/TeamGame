@@ -1,5 +1,6 @@
 package game;
 
+import chapter.*;
 import chapter.chap1.Animation;
 import chapter.chap1.GamePanel_chap1;
 import chapter.chap3.GamePanel_chap3;
