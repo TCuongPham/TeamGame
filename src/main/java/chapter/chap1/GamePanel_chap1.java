@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.awt.geom.Area;
 
 public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
-    private BufferedImage backgroundImage;
+    private BufferedImage backgroundImage, girl_Image;
     public final int ScreenHeight =840;
     public final int ScreenWidth = 960;
     private final int tileSize = 25;
@@ -37,6 +37,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
         try {
             // Đọc ảnh nền từ tệp
             backgroundImage = ImageIO.read(new File("pic/BackGround.png")); // Đổi đường dẫn nếu cần
+            girl_Image = ImageIO.read(new File("pic/GIRL_CHAR_2.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,8 +69,9 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener{
                 this
             );
         }
-        g.setColor(Color.BLUE);
-        g.fillOval(2438 - cameraX ,2118 - cameraY, 50, 50);
+        // g.setColor(Color.BLUE);
+        // g.fillOval(2438 - cameraX ,2118 - cameraY, 50, 50);
+        g.drawImage(girl_Image, 2400 - cameraX ,2088 - cameraY, 120, 90, null);
         Girl_Rec = new Rectangle(2340 - cameraX ,2118 - cameraY, 200, 100);
         if (key == -1) {
             if (stand == 'f') STAND_FRONT.operation(g, r1.x, r1.y);
