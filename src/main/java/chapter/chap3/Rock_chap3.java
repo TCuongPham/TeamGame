@@ -18,12 +18,15 @@ public class Rock_chap3 {
     public int x; 
     public int y;  
     public int preX = x, preY = y;
+    public int DefaultX = x, DefaultY = y;
     Rectangle rect;
     public Rock_chap3(int x, int y) {
         this.x = x * tileSize;
         this.y = y * tileSize;
         this.preX = this.x; // Khởi tạo preX
         this.preY = this.y; // Khởi tạo preY
+        this.DefaultX = this.x;
+        this.DefaultY = this.y;
         rect = new Rectangle(this.x, this.y, tileSize, tileSize); // Khởi tạo Rectangle
     }
     // Phương thức để vẽ nhân vật Rock
@@ -41,6 +44,7 @@ public class Rock_chap3 {
         preY = y;
 
         switch (key) {
+
             case KeyEvent.VK_LEFT:
                 if (x > 0) {
                     x -= tileSize;  // Di chuyển sang trái
