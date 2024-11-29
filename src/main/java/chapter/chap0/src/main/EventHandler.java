@@ -52,7 +52,13 @@ public class EventHandler {
         if(distance > gp.tileSize) {
             canToachEvent = true;
         }
-
+        if (canToachEvent == true) {
+            // Kiểm tra va chạm với OBJ_Chest (rương) tại vị trí (map 0, col 10, row 7)
+            if (hit(0, 10, 7, "any")) {  // Chạm vào rương
+                handleChestEvent();
+            }
+        }
+        
         if(canToachEvent == true) {
             if(hit(0,24,15,"right") == true) { damagePit(gp.dialogueState); }
             else if(hit(0,23,19,"any") == true) { damagePit(gp.dialogueState); }
@@ -63,7 +69,17 @@ public class EventHandler {
         }
 
     }
-
+    public void handleChestEvent() {
+        System.out.println("Player touched the chest!");
+    
+        if (gp.gameCompleteCallback != null) {
+            gp.gameCompleteCallback.run(); // Chuyển cảnh qua map mê cung
+        } else {
+            System.err.println("Game complete callback is not set!");
+        }
+    
+        canToachEvent = false; // Đảm bảo rằng sự kiện không xảy ra liên tục
+    }
     public boolean hit(int map,int col, int row, String reqDirection) {
 
         boolean hit = false;

@@ -15,7 +15,10 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable {
-
+    public Runnable getGameCompleteCallback() {
+        return gameCompleteCallback;
+    }
+    
     //SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
@@ -60,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity monster[][] = new Entity[maxMap][20];
     public ArrayList<Entity > projectileList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
-    private Runnable gameCompleteCallback;
+    public Runnable gameCompleteCallback;
     //GAME STATE
     public int gameState;
     public int titleState = 0;
