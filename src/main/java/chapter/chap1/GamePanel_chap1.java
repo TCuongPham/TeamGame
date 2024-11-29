@@ -1,6 +1,5 @@
 package chapter.chap1;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Polygon;
@@ -261,6 +260,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
     public void keyReleased(KeyEvent e) {
         key = -1;
     }
+   
 
     // Dialogue initialization method
     private List<Dialogue> loadDialogues() {

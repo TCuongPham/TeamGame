@@ -1,132 +1,99 @@
 package game;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class SceneTransition extends JPanel {
-    private float alpha = 0.0f;
-    private boolean isFadingIn = true;
-    private boolean isShowingDialog = false;
+    private float alpha = 0.0f; // Độ mờ (0.0 là trong suốt, 1.0 là tối hoàn toàn)
+    private boolean isFadingIn = true; // Hiệu ứng fade-in
+    private boolean isShowingDialog = false; // Hiển thị đoạn hội thoại
+    private boolean showDialog = true; // Kiểm soát có hiển thị thoại hay không
     private String[] dialogLines = {
-        "Chương 1 hoàn thành...",
-        "Hành trình vẫn còn tiếp diễn...",
-        "Chương 2 bắt đầu!"
+        "Mẹ thằng Đạt Brain lái ngu vãi",
+        "Vỡ mẹ đầu",
+        "Dậy đi ông cháu ơi"
     };
-    private int currentDialog = 0;
-    private Timer fadeTimer;
-    private boolean isTransitionComplete = false;
-    
-    // Thêm biến để theo dõi việc đã chuyển map chưa
-    private boolean hasMapChanged = false;
-    // Thêm interface để callback khi cần chuyển map
-    private MapChangeListener mapChangeListener;
-    
-    // Interface để thông báo thời điểm chuyển map
-    public interface MapChangeListener {
-        void onMapChange();
+    private int dialogIndex = 0; // Dòng hội thoại hiện tại
+    private int dialogDisplayTime = 0; // Thời gian hiển thị dòng thoại
+    private int maxDialogDisplayTime = 40; // Thời gian (số bước Timer) để giữ mỗi dòng thoại
+    private Timer timer; // Timer để điều khiển hiệu ứng
+    private MapChangeListener mapChangeListener; // Callback để chuyển cảnh
+
+    public SceneTransition(boolean showDialog) {
+        this.showDialog = showDialog; // Gán giá trị để quyết định có hiển thị thoại không
+        setOpaque(false); // Đảm bảo nền trong suốt
     }
-    
-    // Setter cho listener
-    public void setMapChangeListener(MapChangeListener listener) {
-        this.mapChangeListener = listener;
-    }
-    
-    public SceneTransition() {
-        setBackground(Color.BLACK);
-        setOpaque(false);
-        setupTimer();
-    }
-    
-    private void setupTimer() {
-        fadeTimer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (isFadingIn) {
-                    
-                    alpha += 0.33f;
-                    if (alpha >= 1.0f) {
-                        alpha = 1.0f;
-                        isFadingIn = false;
-                        isShowingDialog = true;
-                        
-                        // Thông báo chuyển map khi màn hình đã tối hoàn toàn
-                        if (!hasMapChanged && mapChangeListener != null) {
-                            mapChangeListener.onMapChange();
-                            hasMapChanged = true;
+
+    // Bắt đầu hiệu ứng chuyển cảnh
+    public void startTransition() {
+        timer = new Timer(40, e -> { // Timer chạy mỗi 50ms
+            if (isFadingIn) {
+                alpha += 0.05f; // Tăng độ mờ
+                if (alpha >= 1.0f) {
+                    alpha = 1.0f;
+                    isFadingIn = false; // Dừng hiệu ứng fade-in
+                    if (showDialog) {
+                        isShowingDialog = true; // Bắt đầu hiển thị thoại nếu được phép
+                    } else {
+                        if (mapChangeListener != null) {
+                            mapChangeListener.onMapChange(); // Chuyển cảnh ngay nếu không hiển thị thoại
+                            timer.stop();
                         }
                     }
-                } else if (isShowingDialog) {
-                    if (currentDialog < dialogLines.length - 1) {
-                        currentDialog++;
-                    } else {
-                        isShowingDialog = false;
-                    }
-                } else {
-                    alpha -= 0.33f;
-                    if (alpha <= 0.0f) {
-                        alpha = 0.0f;
-                        fadeTimer.stop();
-                        isTransitionComplete = true;
+                }
+            } else if (isShowingDialog) {
+                dialogDisplayTime++;
+                if (dialogDisplayTime >= maxDialogDisplayTime) {
+                    dialogDisplayTime = 0; // Reset thời gian hiển thị
+                    dialogIndex++;
+                    if (dialogIndex >= dialogLines.length) {
+                        isShowingDialog = false; // Kết thúc hội thoại
+                        if (mapChangeListener != null) {
+                            mapChangeListener.onMapChange(); // Gọi callback để chuyển cảnh
+                        }
+                        timer.stop();
                     }
                 }
-                repaint();
             }
+            repaint(); // Vẽ lại giao diện
         });
+        timer.start();
     }
-    
-    public void startTransition() {
-        alpha = 0.0f;
-        isFadingIn = true;
-        isShowingDialog = false;
-        currentDialog = 0;
-        isTransitionComplete = false;
-        hasMapChanged = false;  // Reset trạng thái chuyển map
-        fadeTimer.start();
-    }
-    
-    public boolean isTransitionComplete() {
-        return isTransitionComplete;
-    }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g.create();
-        
-        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        g2d.setColor(Color.BLACK);
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Vẽ hiệu ứng mờ dần
+        g2d.setColor(new Color(0, 0, 0, Math.min(alpha, 1.0f))); // Màn hình tối dần
         g2d.fillRect(0, 0, getWidth(), getHeight());
-        
-        if (isShowingDialog && alpha >= 1.0f) {
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+
+        // Hiển thị đoạn hội thoại nếu được phép
+        if (isShowingDialog && dialogIndex < dialogLines.length) {
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("Arial", Font.BOLD, 24));
-            
-            FontMetrics fm = g2d.getFontMetrics();
-            String text = dialogLines[currentDialog];
-            int textWidth = fm.stringWidth(text);
-            int textHeight = fm.getHeight();
-            
-            g2d.drawString(text,
-                         (getWidth() - textWidth) / 2,
-                         (getHeight() - textHeight) / 2 + fm.getAscent());
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            String line = dialogLines[dialogIndex];
+            FontMetrics metrics = g2d.getFontMetrics();
+            int x = (getWidth() - metrics.stringWidth(line)) / 2; // Căn giữa dòng chữ
+            int y = getHeight() / 2; // Hiển thị ở giữa màn hình
+            g2d.drawString(line, x, y);
         }
-        
-        g2d.dispose();
+    }
+
+    // Gắn callback để chuyển cảnh
+    public void setMapChangeListener(MapChangeListener listener) {
+        this.mapChangeListener = listener;
+    }
+
+    // Interface callback
+    public interface MapChangeListener {
+        void onMapChange();
     }
 }
