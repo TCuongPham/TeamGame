@@ -86,7 +86,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void setupGame() {
         aSetter.setObject();
-        aSetter.setNPC();
         aSetter.setMonster();
         //playMusic(0);
         gameState = titleState;
@@ -99,7 +98,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void retry() {
         player.setDefaultPosition();
         player.restoreLifeAndMan();
-        aSetter.setNPC();
         aSetter.setMonster();
     }
 
@@ -109,7 +107,6 @@ public class GamePanel extends JPanel implements Runnable {
         player.restoreLifeAndMan();
         player.setItem();
         aSetter.setObject();
-        aSetter.setNPC();
         aSetter.setMonster();
     }
 

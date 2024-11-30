@@ -1,7 +1,5 @@
 package chapter.chap0.src.main;
 
-import java.awt.*;
-
 public class EventHandler {
 
     GamePanel gp;
@@ -60,10 +58,12 @@ public class EventHandler {
         }
         
         if(canToachEvent == true) {
-            if(hit(0,24,15,"right") == true) { damagePit(gp.dialogueState); }
-            else if(hit(0,23,19,"any") == true) { damagePit(gp.dialogueState); }
+            if(hit(0,35,43,"any") == true) { damagePit1(gp.dialogueState); }
+            else if(hit(0,8,21,"any") == true) { damagePit2(gp.dialogueState); }
+            else if(hit(0,38,11,"any") == true) { damagePit3(gp.dialogueState); }
+            else if(hit(0,11,35,"any") == true) { damagePit4(gp.dialogueState); }
+            else if(hit(0,8,18,"any") == true) { damagePit5(gp.dialogueState); }
             //if(hit(24,15,"right") == true) { teleport(gp.dialogueState); }
-            else if(hit(0,23,7 ,"up") == true) { healingPool(gp.dialogueState); }
             else if(hit(0,10,7,"any") == true) {teleport(1,23,21);}
             else if(hit(1,12,13,"any") == true) {teleport(0,23,21);}
         }
@@ -120,26 +120,50 @@ public class EventHandler {
 ////        gp.gameState = gameState;
 //    }
 
-    public void damagePit(int gameState) {
+    public void damagePit1(int gameState) {
 
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You fall into a pit!";
-        gp.player.life -= 1;
-//        eventRect[col][row].eventDone = true;
+        gp.ui.currentDialogue = "Mình sẽ dùng laptop gaming tiêu diệt đám ma vật! ";
         canToachEvent = false;
+    }
+    public void damagePit2(int gameState) {
 
+        gp.gameState = gameState;
+        gp.ui.currentDialogue = "Chỗ này hình như bị chặn bởi dòng chảy ma pháp!";
+        canToachEvent = false;
     }
 
-    public void healingPool(int gameState) {
-        if(gp.keyH.enterPressed == true) {
-            gp.gameState = gameState;
-            gp.player.attackCancel = true;
-            gp.ui.currentDialogue = "You drink the water.\nYour life has been recorved!";
-            gp.player.life = gp.player.maxLife;
-            gp.aSetter.setMonster();
-        }
-        gp.keyH.enterPressed = false;
+    public void damagePit3(int gameState) {
+
+        gp.gameState = gameState;
+        gp.ui.currentDialogue = "Sao chồ này lại bị bỏ hoang!";
+        canToachEvent = false;
     }
+
+    public void damagePit4(int gameState) {
+
+        gp.gameState = gameState;
+        gp.ui.currentDialogue = "Hồ này trông quen quen lạ thường";
+        canToachEvent = false;
+    }
+
+    public void damagePit5(int gameState) {
+
+        gp.gameState = gameState;
+        gp.ui.currentDialogue = "Khám phá lâu đài kia thôi!";
+        canToachEvent = false;
+    }
+
+    // public void healingPool(int gameState) {
+    //     if(gp.keyH.enterPressed == true) {
+    //         gp.gameState = gameState;
+    //         gp.player.attackCancel = true;
+    //         gp.ui.currentDialogue = "You drink the water.\nYour life has been recorved!";
+    //         gp.player.life = gp.player.maxLife;
+    //         gp.aSetter.setMonster();
+    //     }
+    //     gp.keyH.enterPressed = false;
+    // }
 
     public void teleport(int map, int col, int row) {
         gp.currentMap = map;

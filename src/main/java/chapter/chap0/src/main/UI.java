@@ -207,7 +207,7 @@ public class UI {
             x = getXforCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text,x,y);
-            if(commandNum == 2) {
+            /*if(commandNum == 2) {
                 g2.drawString(">",x-gp.tileSize,y);
             }
         } else if(titleScreenState == 1) {
@@ -250,7 +250,7 @@ public class UI {
             if(commandNum == 3) {
                 g2.drawString(">",x-gp.tileSize,y);
             }
-
+*/
         }
 
     }
@@ -304,8 +304,8 @@ public class UI {
         final int lineHeight = 35;
 
         //NAMES
-        g2.drawString("Level",textX,textY);
-        textY += lineHeight;
+        /*g2.drawString("Level",textX,textY);
+        textY += lineHeight;*/
         g2.drawString("Life",textX,textY);
         textY += lineHeight;
         g2.drawString("Strength",textX,textY);
@@ -316,12 +316,12 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Defense",textX,textY);
         textY += lineHeight;
-        g2.drawString("Exp",textX,textY);
+        /*g2.drawString("Exp",textX,textY);
         textY += lineHeight;
         g2.drawString("Next Level",textX,textY);
         textY += lineHeight;
         g2.drawString("Coin",textX,textY);
-        textY += lineHeight;
+        textY += lineHeight;*/
         g2.drawString("Weapon",textX,textY);
         textY += lineHeight;
         g2.drawString("Shield",textX,textY);

@@ -1,9 +1,7 @@
 package chapter.chap0.src.monster;
 
 import chapter.chap0.src.entity.Entity;
-import chapter.chap0.src.entity.Projectile;
 import chapter.chap0.src.main.GamePanel;
-import chapter.chap0.src.object.OBJ_Rock;
 
 import java.util.Random;
 
@@ -26,7 +24,6 @@ public class MON_GreenSlime extends Entity {
         defense = 0;
         exp = 2;
 
-        projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;
         solidArea.y = 18;
@@ -89,12 +86,12 @@ public class MON_GreenSlime extends Entity {
             actionLockCounter = 0;
         }
 
-        int i = new Random().nextInt(100) + 1;
+/*        int i = new Random().nextInt(100) + 1;
         if(i>99 && projectile.alive == false && shotAvailableCounter == 30) {
             projectile.set(worldX,worldY,direction,true,this);
             gp.projectileList.add(projectile);
             shotAvailableCounter = 0;
-        }
+        }*/
 
         if(shotAvailableCounter < 30) {
             shotAvailableCounter++;

@@ -1,20 +1,15 @@
 package chapter.chap0.src.entity;
 
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import chapter.chap0.src.main.GamePanel;
 import chapter.chap0.src.main.KeyHandler;
-import chapter.chap0.src.main.UtilityTool;
-import chapter.chap0.src.object.OBJ_Fireball;
-import chapter.chap0.src.object.OBJ_Key;
 import chapter.chap0.src.object.OBJ_Shield_Wood;
 import chapter.chap0.src.object.OBJ_Sword_Normal;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Player extends Entity{
 
@@ -67,31 +62,31 @@ public class Player extends Entity{
 //        worldX = gp.tileSize * 23;
 //        worldY = gp.tileSize * 21;
 
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 35;
+        worldY = gp.tileSize * 43;
 
         speed = 4;
         direction = "up";
 
         //PLAYER STATUS
-        level = 1;
+/*        level = 1;*/
         maxLife = 6;
         life = maxLife;
-        strength = 1; //the more strength he has, the more damage he gives
+        strength = 2; //the more strength he has, the more damage he gives
         dexterity = 1; //the more dexterity he has, the less damage he receives
-        exp = 0;
+/*        exp = 0;
         nextLevelExp = 5;
-        coin = 0;
+        coin = 0;*/
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
-        projectile = new OBJ_Fireball(gp);
+/*        projectile = new OBJ_Fireball(gp);*/
         attack = getAttack(); //the total attack value is decide by strength and weapon
         defense = getDefense(); //the total defense value is decide by dexterity and shield
     }
 
     public void setDefaultPosition() {
-        worldX = gp.tileSize*23;
-        worldY = gp.tileSize*21;
+        worldX = gp.tileSize*35;
+        worldY = gp.tileSize*43;
         direction = "down";
     }
 
@@ -146,7 +141,7 @@ public class Player extends Entity{
             attackRight2 = setup("/player/huster_attack_right_2", gp.tileSize, gp.tileSize);
         }
 
-        if(currentWeapon.type == type_axe) {
+/*        if(currentWeapon.type == type_axe) {
             attackUp1 = setup("/player/boy_axe_up_1", gp.tileSize, gp.tileSize*2);
             attackUp2 = setup("/player/boy_axe_up_2", gp.tileSize, gp.tileSize*2);
 
@@ -158,7 +153,7 @@ public class Player extends Entity{
 
             attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize*2, gp.tileSize);
             attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize*2, gp.tileSize);
-        }
+        }*/
 
     }
 
@@ -401,23 +396,23 @@ public class Player extends Entity{
                     damage = 0;
                 }
                 gp.monster[gp.currentMap][i].life -= damage;
-                gp.ui.addMessage(damage + "damage!");
+/*                gp.ui.addMessage(damage + "damage!");*/
                 gp.monster[gp.currentMap][i].invincible = true;
                 gp.monster[gp.currentMap][i].damageReaction();
 
                 if(gp.monster[gp.currentMap][i].life <= 0) {
                     gp.monster[gp.currentMap][i].dying = true;
                     ++diedMonsterCounter;
-                    gp.ui.addMessage("killed the " + gp.monster[gp.currentMap][i].name + "!");
-                    gp.ui.addMessage("Exp " + gp.monster[gp.currentMap][i].exp);
-                    exp += gp.monster[gp.currentMap][i].exp;
-                    checkLevelUp();
+/*                    gp.ui.addMessage("Mình đã tiêu diệt được " + gp.monster[gp.currentMap][i].name + "!");*/
+/*                    gp.ui.addMessage("Exp " + gp.monster[gp.currentMap][i].exp);*/
+/*                    exp += gp.monster[gp.currentMap][i].exp;*/
+/*                    checkLevelUp();*/
                 }
             }
         }
     }
 
-    public void checkLevelUp() {
+    /*public void checkLevelUp() {
         if(exp >= nextLevelExp) {
             level++;
             nextLevelExp = nextLevelExp*2;
@@ -430,7 +425,7 @@ public class Player extends Entity{
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are level" + level + "now\n" + "You feel stronger!";
         }
-    }
+    }*/
 
     public void selectItem() {
 

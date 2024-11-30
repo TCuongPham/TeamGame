@@ -57,18 +57,16 @@ public class TileManeger {
     }
 
     public void getTileManager() {
-        setup(0, "grass", false);
-        setup(1, "wall", true);
-        setup(2, "water", true);
-        setup(3, "earth", false);
-        setup(4, "tree", true);
-        setup(5, "sand", false);
-        setup(10, "grass00", false);
-        setup(40, "wall", true);
-        setup(41, "tree", true);
-        setup(42, "hut", false);
-        setup(43, "floor01", false);
-        setup(44, "table01", true);
+        setup(0, "grass1", false);
+        setup(1, "wall1", true);
+        setup(2, "water1", true);
+        setup(3, "earth1", false);
+        setup(4, "tree1", true);
+        setup(5, "sand1", false);
+        setup(6, "bridge", false);
+        setup(7, "wall1", false);
+        setup(8, "flower", false);
+        setup(9, "brush", true);
     }
 
     public void setup(int index, String imagePath, boolean collision) {
