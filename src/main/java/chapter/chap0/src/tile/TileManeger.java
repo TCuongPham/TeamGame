@@ -1,15 +1,15 @@
 package chapter.chap0.src.tile;
 
-import chapter.chap0.src.main.GamePanel;
-import chapter.chap0.src.main.UtilityTool;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import javax.imageio.ImageIO;
+
+import chapter.chap0.src.main.GamePanel;
+import chapter.chap0.src.main.UtilityTool;
 
 public class TileManeger {
 
@@ -64,9 +64,11 @@ public class TileManeger {
         setup(4, "tree1", true);
         setup(5, "sand1", false);
         setup(6, "bridge", false);
-        setup(7, "wall1", false);
+        setup(7, "wall2", true);
         setup(8, "flower", false);
         setup(9, "brush", true);
+        setup(10, "stree", false);
+        setup(11, "rock", true);
     }
 
     public void setup(int index, String imagePath, boolean collision) {

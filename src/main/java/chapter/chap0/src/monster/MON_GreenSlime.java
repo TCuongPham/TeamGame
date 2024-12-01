@@ -20,15 +20,15 @@ public class MON_GreenSlime extends Entity {
         maxLife = 4;
         life = maxLife;
 
-        attack = 5;
+        attack = 3;
         defense = 0;
         exp = 2;
 
 
         solidArea.x = 3;
         solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.width = 46;
+        solidArea.height = 34;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -48,17 +48,7 @@ public class MON_GreenSlime extends Entity {
         right1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
         right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
 
-//        up1 = setup("/monster/mt_up_1", gp.tileSize, gp.tileSize);
-//        up2 = setup("/monster/mt_up_2", gp.tileSize, gp.tileSize);
-//
-//        down1 = setup("/monster/mt_down_1", gp.tileSize, gp.tileSize);
-//        down2 = setup("/monster/mt_down_2", gp.tileSize, gp.tileSize);
-//
-//        left1 = setup("/monster/mt_down_1", gp.tileSize, gp.tileSize);
-//        left2 = setup("/monster/mt_down_2", gp.tileSize, gp.tileSize);
-//
-//        right1 = setup("/monster/mt_down_1", gp.tileSize, gp.tileSize);
-//        right2 = setup("/monster/mt_down_2", gp.tileSize, gp.tileSize);
+
     }
 
     public void setAction() {
