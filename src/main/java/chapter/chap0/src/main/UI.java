@@ -166,7 +166,7 @@ public class UI {
 
             //TITLE NAME
             g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
-            String text = "LXT";
+            String text = "8th Year Student";
             int x = getXforCenteredText(text);
             int y = gp.tileSize*3;
 

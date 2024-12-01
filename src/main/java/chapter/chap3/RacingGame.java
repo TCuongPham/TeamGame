@@ -71,7 +71,7 @@ public class RacingGame extends JPanel implements ActionListener, KeyListener {
         try {
             // Tải ảnh từ thư mục "pic"
             roadImage = ImageIO.read(new File("pic/road.png"));
-            carImage = ImageIO.read(new File("pic/car.png"));
+            carImage = ImageIO.read(new File("pic/car3.png"));
 
             String[] obstaclePaths = {
                 "pic/police.png",

@@ -1,5 +1,8 @@
 package game;
 
+import javax.swing.JFrame;
+
+import chapter.chap0.src.main.GamePanel;
 import chapter.chap1.GamePanel_chap1;
 import chapter.chap3.GamePanel_chap3;
 import chapter.chap3.RacingGame;
@@ -11,7 +14,7 @@ public class MAIN {
     public static JFrame frame;
 
     public static void main(String[] args) {
-        frame = new JFrame("Combined Game");
+        frame = new JFrame("8th Year Student");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(960, 840);
         frame.setLocationRelativeTo(null);
@@ -42,9 +45,8 @@ public class MAIN {
     public static void switchToMazeGame() {
         frame.getContentPane().removeAll();
 
-        GamePanel_chap3 mazeGame = new GamePanel_chap3(); // Map mê cung
+        GamePanel_chap3 mazeGame = new GamePanel_chap3();// Map mê cung
         frame.add(mazeGame);
-
         // Gắn callback để chuyển sang game đua xe
         mazeGame.setSceneChangeListener(() -> switchToRacingGame());
         mazeGame.requestFocusInWindow();
