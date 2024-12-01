@@ -5,30 +5,30 @@ import chapter.chap0.src.main.GamePanel;
 
 import java.util.Random;
 
-public class MON_GreenSlime extends Entity {
+public class MON_GreenSlime2 extends Entity {
 
     GamePanel gp;
 
-    public MON_GreenSlime(GamePanel gp) {
+    public MON_GreenSlime2 (GamePanel gp) {
         super(gp);
 
         this.gp = gp;
 
         type = type_monster;
-        name = "Green Slime";
-        speed = 1;
-        maxLife = 4;
+        name = "Bat";
+        speed = 2;
+        maxLife = 2;
         life = maxLife;
 
-        attack = 3;
+        attack = 5;
         defense = 0;
         exp = 2;
 
 
         solidArea.x = 3;
         solidArea.y = 18;
-        solidArea.width = 46;
-        solidArea.height = 34;
+        solidArea.width = 42;
+        solidArea.height = 30;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -36,19 +36,19 @@ public class MON_GreenSlime extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-
-        down1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-
-        left1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-
-        right1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
 
 
+        up1 = setup("/monster/mt_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/monster/mt_down_2", gp.tileSize, gp.tileSize);
+
+        down1 = setup("/monster/mt_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/monster/mt_down_2", gp.tileSize, gp.tileSize);
+
+        left1 = setup("/monster/mt_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/monster/mt_down_2", gp.tileSize, gp.tileSize);
+
+        right1 = setup("/monster/mt_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/monster/mt_down_2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction() {
