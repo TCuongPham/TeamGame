@@ -52,7 +52,10 @@ public class Sound {
     }
 
     public void stop() {
-        clip.stop();
+        if (clip != null && clip.isOpen()) {
+            clip.stop();
+            clip.close();
+        }
     }
 
     public void checkVolume() {

@@ -7,12 +7,11 @@ import chapter.chap1.GamePanel_chap1;
 import chapter.chap3.GamePanel_chap3;
 import chapter.chap3.RacingGame;
 import chapter.chap0.src.main.GamePanel;
-
 import javax.swing.*;
 
 public class MAIN {
     public static JFrame frame;
-
+    public static GamePanel gamePanel = new GamePanel();
     public static void main(String[] args) {
         frame = new JFrame("8th Year Student");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +28,7 @@ public class MAIN {
     public static void startGameQuai() {
         frame.getContentPane().removeAll();
 
-        GamePanel gamePanel = new GamePanel(); // Game đánh quái
+        //GamePanel gamePanel = new GamePanel(); // Game đánh quái
         frame.add(gamePanel);
 
         // Gắn callback để chuyển sang game mê cung
@@ -44,7 +43,6 @@ public class MAIN {
     // Chuyển sang game mê cung
     public static void switchToMazeGame() {
         frame.getContentPane().removeAll();
-
         GamePanel_chap3 mazeGame = new GamePanel_chap3();// Map mê cung
         frame.add(mazeGame);
         // Gắn callback để chuyển sang game đua xe
