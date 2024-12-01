@@ -59,20 +59,19 @@ public class Player extends Entity{
 
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 35;
-        worldY = gp.tileSize * 43;
+/*        worldX = gp.tileSize * 35;
+        worldY = gp.tileSize * 43;*/
 
-/*
         worldX = gp.tileSize * 8;
         worldY = gp.tileSize * 18;
-*/
+
 
         speed = 4;
         direction = "up";
 
         //PLAYER STATUS
 /*        level = 1;*/
-        maxLife = 1000;
+        maxLife = 10;
         life = maxLife;
         strength = 2; //the more strength he has, the more damage he gives
         dexterity = 1; //the more dexterity he has, the less damage he receives
@@ -89,6 +88,7 @@ public class Player extends Entity{
     public void setDefaultPosition() {
         worldX = gp.tileSize*35;
         worldY = gp.tileSize*43;
+
         direction = "down";
     }
 
@@ -142,20 +142,6 @@ public class Player extends Entity{
             attackRight1 = setup("/player/huster_right_1", gp.tileSize, gp.tileSize);
             attackRight2 = setup("/player/huster_attack_right_2", gp.tileSize, gp.tileSize);
         }
-
-/*        if(currentWeapon.type == type_axe) {
-            attackUp1 = setup("/player/boy_axe_up_1", gp.tileSize, gp.tileSize*2);
-            attackUp2 = setup("/player/boy_axe_up_2", gp.tileSize, gp.tileSize*2);
-
-            attackDown1 = setup("/player/boy_axe_down_1", gp.tileSize, gp.tileSize*2);
-            attackDown2 = setup("/player/boy_axe_down_2", gp.tileSize, gp.tileSize*2);
-
-            attackLeft1 = setup("/player/boy_axe_left_1", gp.tileSize*2, gp.tileSize);
-            attackLeft2 = setup("/player/boy_axe_left_2", gp.tileSize*2, gp.tileSize);
-
-            attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize*2, gp.tileSize);
-            attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize*2, gp.tileSize);
-        }*/
 
     }
 
@@ -317,22 +303,6 @@ public class Player extends Entity{
 
     }
 
-//    public void pickUpObject(int i) {
-//        if(keyH.enterPressed == true) {
-//            if(i != 999) {
-//                String text = "";
-//                if(inventory.size() < maxInventorySize && gp.obj[i].name != "door" && gp.obj[i].name != "chest") {
-//                    text = "Bạn nhặt được một " + gp.obj[i].name + "!";
-//                    inventory.add(gp.obj[i]);
-//                    gp.playSE(1);
-//                } else {
-//                    text = "Túi đồ của bạn đã đầy hay vứt bớt đồ đi!";
-//                }
-//                gp.ui.addMessage(text);
-//                gp.obj[i] = null;
-//            }
-//        }
-//    }
 
     public void pickUpObject(int i) {
         if(keyH.enterPressed == true) {

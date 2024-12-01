@@ -20,6 +20,7 @@ public class MAIN {
 
         // Bắt đầu với game đánh quái
         startGameQuai();
+        gamePanel.playMusic(0);
         
         frame.setVisible(true);
     }
@@ -50,6 +51,8 @@ public class MAIN {
         mazeGame.requestFocusInWindow();
         frame.revalidate();
         frame.repaint();
+
+        gamePanel.stopGame();
     }
 
     // Chuyển sang game đua xe

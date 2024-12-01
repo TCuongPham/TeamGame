@@ -110,7 +110,9 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setMonster();
     }
     public void stopGame() {
+        stopMusic();
         running = false;
+
         try {
             if (gameThread != null) {
                 gameThread.join(); // Đợi thread dừng hẳn

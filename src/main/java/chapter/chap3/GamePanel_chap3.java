@@ -1,5 +1,7 @@
 package chapter.chap3;
 
+import chapter.chap0.src.main.GamePanel;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -70,6 +72,8 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
         new Rock_chap3(6, 4)
     };
 
+    public static GamePanel gamePanel = new GamePanel();
+
     public GamePanel_chap3() {
         try {
             backgroundImage = ImageIO.read(new File("pic/NEWBG3.png")); 
@@ -92,6 +96,8 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
         this.setFocusable(true);
         this.addKeyListener(this);
         this.requestFocus();
+
+        gamePanel.playMusic(12);
 
         Timer timer = new Timer(33, e -> repaint());
         timer.start();
@@ -181,7 +187,7 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
             if (r[i].vaCham(rectA)) {
                 revertPosition();
                 r[i].diChuyen(key);
-
+                gamePanel.playSE(13);
                 if (chamTuong(r[i].rect)) r[i].luiLai();
 
                 for (int j = 0; j < r.length; j++) {
@@ -201,6 +207,7 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
     
             // Gọi chuyển cảnh sang game đua xe nếu có SceneChangeListener
             if (sceneChangeListener != null) {
+                gamePanel.stopMusic();
                 sceneChangeListener.onSceneChange();
             } else {
                 System.err.println("SceneChangeListener is null! Cannot change scene.");

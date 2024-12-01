@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import chapter.chap0.src.main.GamePanel;
 import chapter.chap1.GamePanel_chap1;
 import game.SceneTransition;
 
@@ -61,9 +62,13 @@ public class RacingGame extends JPanel implements ActionListener, KeyListener {
     // Tham chiếu đến JFrame
     private JFrame parentFrame;
     private Runnable gameOverCallback;
+
     // Constructor của RacingGame
+    public static GamePanel gamePanel = new GamePanel();
+
     public RacingGame(JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        gamePanel.playMusic(14);
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setFocusable(true);
         addKeyListener(this); // Đăng ký KeyListener cho RacingGame
@@ -193,6 +198,8 @@ public class RacingGame extends JPanel implements ActionListener, KeyListener {
 
             // Kiểm tra va chạm
             if (obs.intersects(carX, carY, carWidth, carHeight)) {
+
+                gamePanel.stopMusic();
                 gameOver(); // Gọi gameOver nếu va chạm
                 return;
             }
