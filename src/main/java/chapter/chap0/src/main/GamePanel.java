@@ -48,13 +48,13 @@ public class GamePanel extends JPanel implements Runnable {
     //SYSTEM
     public TileManeger tileM = new TileManeger(this);
     public KeyHandler keyH = new KeyHandler(this);
-    Sound music = new Sound();
-    Sound se = new Sound();
+    public Sound music = new Sound();
+    public Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public EventHandler eHandler = new EventHandler(this);
     public UI ui = new UI(this);
-    Thread gameThread;
+    public Thread gameThread;
 
     //ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
@@ -73,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int characterState = 4;
     public final int optionState = 5;
     public final int gameOverState = 6;
-
+    private boolean running = true;
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -109,7 +109,17 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObject();
         aSetter.setMonster();
     }
-
+    public void stopGame() {
+        running = false;
+        try {
+            if (gameThread != null) {
+                gameThread.join(); // Đợi thread dừng hẳn
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+    }
     public void startgameThread() {
 
         gameThread = new Thread(this);
@@ -127,7 +137,7 @@ public class GamePanel extends JPanel implements Runnable {
         long timer = 0;
         int drawCount = 0;
 
-        while(gameThread!=null) {
+        while(running) {
 
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime)/drawInterval;
