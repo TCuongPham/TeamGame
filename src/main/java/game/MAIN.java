@@ -55,7 +55,6 @@ public class MAIN {
 
         //GamePanel gamePanel = new GamePanel(); // Game đánh quái
         frame.add(gamePanel);
-
         // Gắn callback để chuyển sang game mê cung
         gamePanel.setGameCompleteCallback(() -> switchToMazeGame());
         gamePanel.setupGame();
@@ -63,6 +62,7 @@ public class MAIN {
         gamePanel.requestFocusInWindow();
         frame.revalidate();
         frame.repaint();
+
     }
 
     // Chuyển sang game mê cung

@@ -121,6 +121,8 @@ public class KeyHandler implements KeyListener {
                 if(gp.ui.commandNum == 0) {
                     System.out.println("Do some fighter specific stuff!");
                     gp.gameState = gp.playState;
+                    gp.stopMusic();
+                    gp.playMusic(16);
                 }
                 if(gp.ui.commandNum == 1) {
                     System.out.println("Do some thief specific stuff!");
@@ -296,7 +298,7 @@ public class KeyHandler implements KeyListener {
             if(gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
                 gp.retry();
-                gp.playMusic(0);
+                gp.playMusic(16);
             } else if(gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
                 gp.restart();
