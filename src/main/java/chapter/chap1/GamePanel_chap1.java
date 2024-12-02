@@ -1,6 +1,8 @@
 package chapter.chap1;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
     // Screen and Rendering Properties
@@ -40,6 +43,18 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
     private char stand = 'f';
     private boolean isDialogueActive = false;
 
+    //suy nghĩ
+    private String suynghi = " ";
+    private boolean showSuynghi = false;
+    private  javax.swing.Timer suynghiTimer;
+    private int buocsuynghi = 0;
+    private String[] cacsuynghi = {
+        "Lúc nào cx là những giấc mơ quái dị đó, ngủ trong lớp mà cũng gặp, mệt mỏi quá",
+        "May mà thầy Hóa dễ nên không bị mắng",
+        "Thôi điểm danh xong OOP r, nhót lên thư viện làm giấc vậy",
+
+    };
+
     // Game Objects
     private BufferedImage backgroundImage,girl_Image;
     Rectangle hcnTest, Girl_Rec;
@@ -57,6 +72,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
     Thread thread;
 
     public GamePanel_chap1() {
+        Suynghitrongem();
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
         
         // Initialize Background
@@ -84,6 +100,24 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
 
         // Initialize Animations
         initializeAnimations();
+    }
+
+    private void Suynghitrongem() {
+        suynghiTimer = new Timer (2000, e -> {
+            if (buocsuynghi <= cacsuynghi.length){
+                suynghi = cacsuynghi[buocsuynghi];
+                showSuynghi = true;
+                repaint();
+                buocsuynghi++;
+
+            }else{
+                showSuynghi = false;
+                suynghiTimer.stop();
+
+            }
+        });
+        suynghiTimer.setInitialDelay(0);
+        suynghiTimer.start();
     }
 
     private void initializeAnimations() {
@@ -123,6 +157,13 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
         // Draw Dialogue if Active
         if (isDialogueActive) {
             dialogueManager.draw(g, ScreenWidth, ScreenHeight);
+        }
+        if(showSuynghi){
+            g.setColor(new Color(0,0,0,150));
+            g.fillRoundRect(r1.x - 40, r1.y , 200, 40, 10, 10);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.PLAIN,14));
+            g.drawString(suynghi,r1.x - 30, r1.y - 40);
         }
     }
 
@@ -266,55 +307,128 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
     private List<Dialogue> loadDialogues() {
         List<Dialogue> dialogues = new ArrayList<>();
         dialogues.add(new Dialogue(
-            "girl_start",
-            "Chào bạn! Bạn có vẻ như đang tìm kiếm điều gì đó?",
+            "linh_start",
+            "Đạt ơi! Là cậu phải không? Trông phế thế này, tớ không nhận ra luôn đấy!",
             List.of(
-                new Response("con chó", "girl_info_search"),
-                new Response("con mèo", "girl_help"),
-                new Response("thằng Trương Viết Bạn", "girl_passing")
+                new Response("Ơ, cậu là ai?", "linh_reveal_identity"),
+                new Response("Linh! Lâu rồi không gặp!", "linh_casual_response"),
+                new Response("Phế chỗ nào? Cậu nhìn lại mình đi!", "linh_tease_response")
             )
         ));
+
+        // Linh tiết lộ danh tính
         dialogues.add(new Dialogue(
-            "girl_info_search",
-        "Tôi có thể giúp bạn tìm thông tin. Bạn quan tâm đến lĩnh vực nào?",
+            "linh_reveal_identity",
+            "Tớ là Linh đây, bạn cũ của cậu. Quên tớ rồi à?",
             List.of(
-                new Response("thằng Cường", "girl_library_info"),
-            new Response("Triều Cường", "girl_study_info"),
-            new Response("Bạn chó", "girl_start")
+                new Response("À, chào Linh! Lâu rồi không gặp.", "linh_continue_casual"),
+                new Response("Haha, quên sao được. Dạo này cậu sao rồi?", "linh_ask_about_life")
             )
         ));
+
+        // Đạt trêu Linh về vẻ ngoài
         dialogues.add(new Dialogue(
-            "girl_library_info",
-        "Thư viện Tạ Quang Bửu là một trong những thư viện lớn nhất Đông Nam Á, với hơn 1 triệu đầu sách.",
+            "linh_tease_response",
+            "Xấu? Xấu nhưng đầy cá tính! Khác với cậu, trông như cây tre trăm đốt bị vứt ra đồng!",
             List.of(
-                new Response("fwefne", "girl_enter_library"),
-            new Response("ểwr", "girl_info_search")
+                new Response("Thôi, không đùa nữa. Dạo này cậu thế nào?", "linh_ask_about_life")
             )
         ));
+
+        // Linh tiếp tục câu chuyện
         dialogues.add(new Dialogue(
-            "girl_enter_library",
-        "Rất tiếc, thư viện hiện đang đóng cửa. Bạn có thể quay lại vào giờ mở cửa.",
+            "linh_casual_response",
+            "Tớ biết thế nào cậu cũng đỗ vào Bách Khoa mà, nên tớ cũng đăng ký vào đây. Cậu thấy sao, được học cùng tớ thích không?",
             List.of(
-                new Response("Hiểu rồi", "girl_start")
+                new Response("Tuyệt vời! Lại được làm bạn đồng hành như xưa.", "linh_continue_casual"),
+                new Response("Sợ cậu đuổi kịp tớ sao? Haha!", "linh_competitive_joke")
             )
         ));
+
+        // Linh phản ứng khi Đạt đùa cạnh tranh
         dialogues.add(new Dialogue(
-            "girl_help",
-        "Tôi có thể giúp gì cho bạn? Bạn cần hỗ trợ về điều gì?",
+            "linh_competitive_joke",
+            "Đuổi kịp? Tớ chỉ cần đi bộ cũng vượt cậu đấy! Thế dạo này cậu thế nào?",
             List.of(
-                new Response("Hướng dẫn đến thư viện", "girl_library_direction"),
-            new Response("Quay lại", "girl_start")
+                new Response("Không tốt lắm, tớ thường gặp ác mộng.", "linh_talk_about_nightmares"),
+                new Response("Cũng ổn, nhưng mẹ cậu thế nào rồi?", "linh_ask_about_mother")
             )
         ));
+
+        // Tiếp tục hội thoại thân thiện
         dialogues.add(new Dialogue(
-            "girl_library_direction",
-            "Thư viện nằm ở trung tâm khuôn viên, bạn chỉ cần đi thẳng về hướng bắc.",
+            "linh_continue_casual",
+            "Nhưng trông cậu không vui lắm nhỉ? Có chuyện gì sao?",
             List.of(
-                new Response("Hướng dẫn đến thư viện", "girl_library_direction"),
-            new Response("Quay lại", "girl_start")
+                new Response("Không có gì đâu, tớ chỉ khó ngủ thôi.", "linh_talk_about_nightmares"),
+                new Response("Thực ra... tớ muốn kể với cậu một chuyện.", "linh_direct_confession")
             )
         ));
-        
+
+        // Hội thoại về ác mộng
+        dialogues.add(new Dialogue(
+            "linh_talk_about_nightmares",
+            "Ác mộng á? Mơ thấy gì? Quái vật? Hay là tạch OOP?",
+            List.of(
+                new Response("Mơ thấy bị quái vật truy đuổi.", "linh_suggest_psychologist"),
+                new Response("Mơ thấy bị tai nạn xe máy.", "linh_ask_about_mother")
+            )
+        ));
+
+        // Linh gợi ý gặp bác sĩ tâm lý
+        dialogues.add(new Dialogue(
+            "linh_suggest_psychologist",
+            "Cậu nên đi gặp bác sĩ tâm lý đấy! Đừng để quái vật đuổi trong giấc mơ rồi chuyển sang đời thật!",
+            List.of(
+                new Response("Haha, cảm ơn. Nhưng mẹ cậu thế nào rồi?", "linh_ask_about_mother"),
+                new Response("Thực ra... tớ muốn nói một điều quan trọng.", "linh_direct_confession")
+            )
+        ));
+
+        // Linh phản ứng về mẹ
+        dialogues.add(new Dialogue(
+            "linh_ask_about_mother",
+            "À, mẹ tớ ổn rồi. Chỉ bị gãy chân, giờ khỏi hẳn. Nhưng hồi đó tớ giận kẻ gây tai nạn lắm.",
+            List.of(
+                new Response("Cậu có còn giận người đó không?", "linh_response_about_accident"),
+                new Response("Thực ra, tớ muốn thú nhận một chuyện.", "linh_direct_confession")
+            )
+        ));
+
+        // Linh phản ứng về tai nạn
+        dialogues.add(new Dialogue(
+            "linh_response_about_accident",
+            "Ban đầu thì có, nhưng giờ thì không. Nếu không vì tai nạn đó, mẹ tớ đã không bỏ chuyến bay gặp khủng bố hôm ấy rồi...",
+            List.of(
+                new Response("Thực ra, tớ là người gây ra tai nạn đó.", "linh_direct_confession"),
+                new Response("Tớ hiểu. Cảm ơn cậu đã kể.", "linh_talk_about_feelings")
+            )
+        ));
+
+        // Đạt tỏ tình
+        dialogues.add(new Dialogue(
+            "linh_talk_about_feelings",
+            "Thực ra, Linh... ngoài chuyện đó, tớ còn muốn nói một điều. Tớ đã thích cậu từ lâu rồi.",
+            List.of(
+                new Response("Linh phản ứng thế nào?", "linh_response_to_love")
+            )
+        ));
+
+        // Linh đồng ý
+        dialogues.add(new Dialogue(
+            "linh_response_to_love",
+            "Tớ cũng thích cậu lâu rồi, Đạt. Nhưng giờ cậu cần ổn định tâm lý trước đã, sau đó chúng ta sẽ nói chuyện nhiều hơn, được chứ?",
+            List.of(
+                new Response("Tớ đồng ý. Cảm ơn cậu, Linh.", "end_game")
+            )
+        ));
+
+        // Kết thúc game
+        dialogues.add(new Dialogue(
+            "end_game",
+            "Đạt trở về quê, nhận lỗi với gia đình Linh, tỏ tình thành công, và bắt đầu cuộc sống mới đầy hy vọng. Cuối cùng, cậu đã vượt qua ám ảnh quá khứ và tìm thấy tình yêu.",
+            List.of()
+        ));
         return dialogues;
     }
 }

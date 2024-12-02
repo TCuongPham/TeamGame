@@ -30,6 +30,8 @@ public class Sound {
         soundURL[12] = getClass().getResource("/sound/8bit-Bossa.wav");
         soundURL[13] = getClass().getResource("/sound/MoveCar.wav");
         soundURL[14] = getClass().getResource("/sound/race.wav");
+        soundURL[15] = getClass().getResource("/sound/vacham.wav");
+
     }
 
     public void setFile(int i) {

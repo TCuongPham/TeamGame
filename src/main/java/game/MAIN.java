@@ -19,10 +19,34 @@ public class MAIN {
         frame.setLocationRelativeTo(null);
 
         // Bắt đầu với game đánh quái
-        startGameQuai();
+        startStoryIntro();
         gamePanel.playMusic(0);
-        
+
         frame.setVisible(true);
+    }
+    public static void startStoryIntro() {
+        frame.getContentPane().removeAll();
+
+        StoryIntroAndTransition storyIntro = new StoryIntroAndTransition();
+        frame.add(storyIntro);
+
+        // Tạo Timer để kiểm tra trạng thái của màn hình mở đầu
+        Timer checkTransitionTimer = new Timer(100, null);
+        checkTransitionTimer.addActionListener(e -> {
+            if (storyIntro.isTransitionComplete()) {
+                checkTransitionTimer.stop();
+                // Chuyển sang game đánh quái sau khi màn hình mở đầu kết thúc
+                startGameQuai();
+            }
+        });
+
+        // Bắt đầu chuyển cảnh và timer kiểm tra
+        // Không cần gọi startTransition() nữa vì chúng ta đã bắt đầu quá trình trong StoryIntroAndTransition
+        checkTransitionTimer.start();
+
+        storyIntro.requestFocusInWindow();
+        frame.revalidate();
+        frame.repaint();
     }
 
     // Bắt đầu game đánh quái
