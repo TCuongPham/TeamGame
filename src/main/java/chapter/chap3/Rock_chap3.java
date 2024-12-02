@@ -34,8 +34,11 @@ public class Rock_chap3 {
         g.setColor(Color.white);  // Đặt màu trắng
         g.drawImage(bikeImage, x, y, null);  // Vẽ hình tròn tại vị trí (x, y)
     }
+
     public boolean vaCham(Rectangle rectA) {
-        if (rectA.intersects(rect)) return true;
+        if (rectA.intersects(rect)) {
+            return true;
+        }
         else return false;
     }
     // Getter và Setter cho vị trí của nhân vật nếu cần di chuyển

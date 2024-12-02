@@ -15,7 +15,7 @@ public class Sound {
     float volume;
 
     public Sound() {
-        soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
+        soundURL[0] = getClass().getResource("/sound/little-town-orchestral.wav");
         soundURL[1] = getClass().getResource("/sound/coin.wav");
         soundURL[2] = getClass().getResource("/sound/powerup.wav");
         soundURL[3] = getClass().getResource("/sound/unlock.wav");
@@ -27,6 +27,11 @@ public class Sound {
         soundURL[9] = getClass().getResource("/sound/burning.wav");
         soundURL[10] = getClass().getResource("/sound/gameover.wav");
         soundURL[11] = getClass().getResource("/sound/stairs.wav");
+        soundURL[12] = getClass().getResource("/sound/8bit-Bossa.wav");
+        soundURL[13] = getClass().getResource("/sound/MoveCar.wav");
+        soundURL[14] = getClass().getResource("/sound/race.wav");
+        soundURL[15] = getClass().getResource("/sound/vacham.wav");
+
     }
 
     public void setFile(int i) {
