@@ -200,7 +200,7 @@ public class RacingGame extends JPanel implements ActionListener, KeyListener {
             if (obs.intersects(carX, carY, carWidth, carHeight)) {
                 gamePanel.playSE(15);
                 gamePanel.stopMusic();
-
+                gamePanel.playMusic(18);
                 gameOver(); // Gọi gameOver nếu va chạm
                 return;
             }

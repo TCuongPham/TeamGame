@@ -1,9 +1,9 @@
 package chapter.chap0.src.monster;
 
+import java.util.Random;
+
 import chapter.chap0.src.entity.Entity;
 import chapter.chap0.src.main.GamePanel;
-
-import java.util.Random;
 
 public class MON_GreenSlime extends Entity {
 
@@ -27,8 +27,8 @@ public class MON_GreenSlime extends Entity {
 
         solidArea.x = 3;
         solidArea.y = 18;
-        solidArea.width = 46;
-        solidArea.height = 34;
+        solidArea.width = 40;
+        solidArea.height = 38;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

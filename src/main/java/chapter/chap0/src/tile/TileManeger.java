@@ -69,6 +69,7 @@ public class TileManeger {
         setup(9, "brush", true);
         setup(10, "stree", false);
         setup(11, "rock", true);
+        setup(12, "flower2", true);
     }
 
     public void setup(int index, String imagePath, boolean collision) {
