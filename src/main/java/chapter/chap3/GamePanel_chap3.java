@@ -202,7 +202,7 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
 
     private void checkWinCondition() {
         // Kiểm tra nếu tọa độ phù hợp để thắng
-        if (x == 7 * tileSize && (y == 3 * tileSize || y == 4 * tileSize)) {
+        if (x == 7 * tileSize && (y == 3 * tileSize || y == 4 * tileSize) || key == KeyEvent.VK_Z) {
             System.out.println("YOU WIN");
     
             // Gọi chuyển cảnh sang game đua xe nếu có SceneChangeListener

@@ -49,9 +49,10 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
     private  javax.swing.Timer suynghiTimer;
     private int buocsuynghi = 0;
     private String[] cacsuynghi = {
-        "Lúc nào cx là những giấc mơ quái dị đó, ngủ trong lớp mà cũng gặp, mệt mỏi quá",
+        "Lúc nào cx là những giấc mơ quái dị đó",
+        "Ngủ trong lớp mà cũng gặp, mệt mỏi quá",
         "May mà thầy Hóa dễ nên không bị mắng",
-        "Thôi điểm danh xong OOP r, nhót lên thư viện làm giấc vậy",
+        "Điểm danh xong rồi, lên thư viện ngủ tiếp vậy",
 
     };
 
@@ -160,10 +161,10 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
         }
         if(showSuynghi){
             g.setColor(new Color(0,0,0,150));
-            g.fillRoundRect(r1.x - 40, r1.y , 200, 40, 10, 10);
+            g.fillRoundRect(r1.x - 40, r1.y - 40 , 300, 40, 10, 10);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.PLAIN,14));
-            g.drawString(suynghi,r1.x - 30, r1.y - 40);
+            g.drawString(suynghi,r1.x - 30, r1.y - 20);
         }
     }
 
