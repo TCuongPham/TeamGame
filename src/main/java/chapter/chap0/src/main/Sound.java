@@ -32,7 +32,8 @@ public class Sound {
         soundURL[14] = getClass().getResource("/sound/race.wav");
         soundURL[15] = getClass().getResource("/sound/vacham.wav");
         soundURL[16] = getClass().getResource("/sound/Woodland-Fantasy.wav");
-
+        soundURL[17] = getClass().getResource("/sound/among.wav");
+        soundURL[18] = getClass().getResource("/sound/nature sketch.wav");
     }
 
     public void setFile(int i) {

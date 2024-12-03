@@ -123,27 +123,30 @@ public class EventHandler {
     public void damagePit1(int gameState) {
 
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "Mình sẽ dùng laptop gaming tiêu diệt đám ma vật! ";
+        gp.ui.currentDialogue = "Lại là giấc mơ ở vùng đất xa xôi, mình sẽ dùng\n" +
+                "laptop gaming tiêu diệt đám ma vật! ";
         canToachEvent = false;
     }
     public void damagePit2(int gameState) {
 
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "Chỗ này hình như bị chặn bởi dòng chảy ma pháp!";
+        gp.ui.currentDialogue = "Chỗ này hình như bị chặn bởi dòng chảy ma pháp!\n" +
+                "Haizzz chìa khóa ở ngay kia mà, thôi đi đường vòng";
         canToachEvent = false;
     }
 
     public void damagePit3(int gameState) {
 
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "Sao chồ này lại bị bỏ hoang!";
+        gp.ui.currentDialogue = "Chỗ này bị bỏ hoang sao!";
+        gp.playSE(17);
         canToachEvent = false;
     }
 
     public void damagePit4(int gameState) {
 
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "Hồ này trông quen quen lạ thường";
+        gp.ui.currentDialogue = "Hồ này trông quen quen :)";
         canToachEvent = false;
     }
 

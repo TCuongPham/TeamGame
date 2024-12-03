@@ -71,7 +71,7 @@ public class Player extends Entity{
 
         //PLAYER STATUS
 /*        level = 1;*/
-        maxLife = 10;
+        maxLife = 6;
         life = maxLife;
         strength = 2; //the more strength he has, the more damage he gives
         dexterity = 1; //the more dexterity he has, the less damage he receives
@@ -321,10 +321,10 @@ public class Player extends Entity{
                 } else {
                     if(inventory.size() < maxInventorySize) {
                         if(gp.obj[gp.currentMap][i].name == "key") ++keyCounter;
-                        text = "Bạn nhặt được một " + gp.obj[gp.currentMap][i].name + "!";
+                        text = "Mình lấy được chìa khóa rồi!";
                         inventory.add(gp.obj[gp.currentMap][i]);
                     } else {
-                        text = "Túi đã đầy bạn hãy bỏ bớt đồ trong túi đi!";
+                        text = "Túi đầy rồi bỏ bớt đồ trong túi thôi!";
                     }
                     gp.ui.addMessage(text);
                     gp.obj[gp.currentMap][i] = null;
