@@ -162,10 +162,10 @@ public class StoryIntroAndTransition extends JPanel {
     private void startGame() {
         // Transition to the game
         //JFrame gameFrame = new JFrame("Game Window");
-        gameFrame.setSize(960, 540);
-        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setLocationRelativeTo(null);
-        gameFrame.setVisible(true);
+        // gameFrame.setSize(960, 540);
+        // gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // gameFrame.setLocationRelativeTo(null);
+        // gameFrame.setVisible(true);
 
         // Close the story screen when transitioning to the game
         SwingUtilities.getWindowAncestor(this).dispose();
