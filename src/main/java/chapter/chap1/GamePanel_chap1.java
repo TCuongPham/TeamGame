@@ -104,7 +104,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
 
     private void Suynghitrongem() {
         suynghiTimer = new Timer (2000, e -> {
-            if (buocsuynghi <= cacsuynghi.length){
+            if (buocsuynghi < cacsuynghi.length){
                 suynghi = cacsuynghi[buocsuynghi];
                 showSuynghi = true;
                 repaint();
