@@ -1,6 +1,7 @@
 package chapter.chap3;
 
 import chapter.chap0.src.main.GamePanel;
+import game.SceneTransition;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,14 +13,14 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import java.awt.Font;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel_chap3 extends JPanel implements KeyListener {
     private SceneChangeListener sceneChangeListener;
-
     public interface SceneChangeListener {
         void onSceneChange();
     }
@@ -27,10 +28,21 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
     public void setSceneChangeListener(SceneChangeListener listener) {
         this.sceneChangeListener = listener;
     }
+    //suy nghĩ
+    private String suynghi = " ";
+    private boolean showSuynghi = false;
+    private  javax.swing.Timer suynghiTimer;
+    private int buocsuynghi = 0;
+    private String[] cacsuynghi = {
+        "Sao mình lại ở trong nhà xe C7 thế này",
+        "À, chắc mình đang chuẩn bị về nhà. Lối ra ở ngay kia rồi",
+        "Mình chỉ cần đẩy hết những chiếc xe trước mặt này ra là được",
 
-    private BufferedImage backgroundImage, bikeImage, character, character_1;
+    };
+    //ảnh
+    private BufferedImage backgroundImage, bikeImage, character, character_1, muiTen;
     private Image bikImage_scaled, backgroundImage_scaled, character_scaled, character_scaled_right;
-    private Image character_1_scaled, preImage;
+    private Image character_1_scaled, preImage, muiTen_scaled;
     public int check = 0;
     final int TypeSize = 12;
     final int scale = 10;
@@ -45,7 +57,7 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
     private int preY = y;
     public int key = -1;
     boolean winCheck = false;
-
+    Timer timer;
     Rectangle rect1 = new Rectangle(0 * tileSize, 0 * tileSize, 8 * tileSize, tileSize);
     Rectangle rect2 = new Rectangle(5 * tileSize, 1 * tileSize, 3 * tileSize, 1 * tileSize);
     Rectangle rect3 = new Rectangle(7 * tileSize, 2 * tileSize, 1 * tileSize, 1 * tileSize);
@@ -80,7 +92,8 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
             bikeImage = ImageIO.read(new File("pic/xe_may.png"));
             character = ImageIO.read(new File("pic/character.png")); 
             character_1 = ImageIO.read(new File("pic/character_1.png")); 
-
+            muiTen = ImageIO.read(new File("pic/Arrow.png"));
+            muiTen_scaled = muiTen.getScaledInstance(tileSize, tileSize, Image.SCALE_SMOOTH);
             character_1_scaled = character_1.getScaledInstance(tileSize, tileSize, Image.SCALE_SMOOTH);
             character_scaled = character.getScaledInstance(tileSize, tileSize, Image.SCALE_SMOOTH);
             character_scaled_right = character.getScaledInstance(-1 * tileSize, tileSize, Image.SCALE_SMOOTH);
@@ -90,8 +103,9 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Suynghitrongem();
         this.setPreferredSize(new Dimension(tileSize * maxScreenCol, tileSize * maxScreenRow));
-        this.setBackground(Color.black);
+        //this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.addKeyListener(this);
@@ -99,10 +113,26 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
 
         gamePanel.playMusic(12);
 
-        Timer timer = new Timer(33, e -> repaint());
+        timer = new Timer(33, e -> repaint());
         timer.start();
     }
+    private void Suynghitrongem() {
+        suynghiTimer = new Timer (2000, e -> {
+            if (buocsuynghi < cacsuynghi.length){
+                suynghi = cacsuynghi[buocsuynghi];
+                showSuynghi = true;
+                //repaint();
+                buocsuynghi++;
 
+            }else{
+                showSuynghi = false;
+                suynghiTimer.stop();
+
+            }
+        });
+        suynghiTimer.setInitialDelay(0);
+        suynghiTimer.start();
+    }
     public boolean chamTuong(Rectangle rectA) {
         if (rect1.intersects(rectA) || rect2.intersects(rectA) || rect3.intersects(rectA) || 
                 rect4.intersects(rectA) || rect5.intersects(rectA) || rect6.intersects(rectA) || rect7.intersects(rectA)) {
@@ -116,10 +146,18 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
         super.paintComponent(g);
         g.drawImage(backgroundImage_scaled, 0, 0, null);
         drawCharacter(g, key);
-        g.setColor(Color.BLUE);
-        g.fillOval(7 * tileSize + tileSize / 4, 3 * tileSize + tileSize / 4, tileSize / 2, tileSize / 2);
+        // 7 3
+        g.drawImage(muiTen_scaled, 7 *tileSize, 3 *tileSize, null);
         //g.drawImage(character_scaled, x, y, null); // Vẽ nhân vật tại (x, y)
         for (int i = 0; i < 14; i++) r[i].draw(g, bikImage_scaled);
+        if(showSuynghi){
+            g.setColor(new Color(0,0,0,150));
+            g.fillRoundRect(x + 70, y - 10 , 450, 40, 10, 10);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.PLAIN,15));
+            g.drawString(suynghi,x + 80, y + 17);
+            
+        }
     }
     public void drawCharacter(Graphics g, int key) {
         if (key == -1 || key == KeyEvent.VK_LEFT) {
@@ -204,7 +242,7 @@ public class GamePanel_chap3 extends JPanel implements KeyListener {
         // Kiểm tra nếu tọa độ phù hợp để thắng
         if (x == 7 * tileSize && (y == 3 * tileSize || y == 4 * tileSize) || key == KeyEvent.VK_Z) {
             System.out.println("YOU WIN");
-    
+            
             // Gọi chuyển cảnh sang game đua xe nếu có SceneChangeListener
             if (sceneChangeListener != null) {
                 gamePanel.stopMusic();

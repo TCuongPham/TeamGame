@@ -69,6 +69,7 @@ public class RacingGame extends JPanel implements ActionListener, KeyListener {
     public RacingGame(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         gamePanel.playMusic(14);
+        //this.setBackground(Color.BLACK);
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setFocusable(true);
         addKeyListener(this); // Đăng ký KeyListener cho RacingGame
@@ -139,7 +140,6 @@ public class RacingGame extends JPanel implements ActionListener, KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         if (roadImage != null) {
             // Vẽ đường
             g.drawImage(roadImage, (SCREEN_WIDTH - ROAD_WIDTH) / 2, roadY1, ROAD_WIDTH, SCREEN_HEIGHT, null);

@@ -15,9 +15,10 @@ public class SceneTransition extends JPanel {
     private boolean isShowingDialog = false; // Hiển thị đoạn hội thoại
     private boolean showDialog = true; // Kiểm soát có hiển thị thoại hay không
     private String[] dialogLines = {
-        "Mẹ thằng Đạt Brain lái ngu vãi",
-        "Vỡ mẹ đầu",
-        "Dậy đi ông cháu ơi"
+        "Ôi, may quá chỉ là mơ",
+        "Cơ thể mình không bị sao cả",
+        "Tai nạn khủng khiếp thật",
+        "Không khác gì ngày hôm ấy"
     };
     private int dialogIndex = 0; // Dòng hội thoại hiện tại
     private int dialogDisplayTime = 0; // Thời gian hiển thị dòng thoại
@@ -32,7 +33,7 @@ public class SceneTransition extends JPanel {
 
     // Bắt đầu hiệu ứng chuyển cảnh
     public void startTransition() {
-        timer = new Timer(40, e -> { // Timer chạy mỗi 50ms
+        timer = new Timer(40, e -> { // Timer chạy mỗi 40ms
             if (isFadingIn) {
                 alpha += 0.05f; // Tăng độ mờ
                 if (alpha >= 1.0f) {
@@ -70,7 +71,6 @@ public class SceneTransition extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
         // Vẽ hiệu ứng mờ dần
         g2d.setColor(new Color(0, 0, 0, Math.min(alpha, 1.0f))); // Màn hình tối dần
         g2d.fillRect(0, 0, getWidth(), getHeight());

@@ -49,7 +49,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
     private  javax.swing.Timer suynghiTimer;
     private int buocsuynghi = 0;
     private String[] cacsuynghi = {
-        "Lúc nào cx là những giấc mơ quái dị đó",
+        "Lúc nào cũng là những giấc mơ quái dị đó",
         "Ngủ trong lớp mà cũng gặp, mệt mỏi quá",
         "May mà thầy Hóa dễ nên không bị mắng",
         "Điểm danh xong rồi, lên thư viện ngủ tiếp vậy",
