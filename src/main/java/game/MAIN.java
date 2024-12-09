@@ -1,7 +1,5 @@
 package game;
 
-import javax.swing.JFrame;
-
 import chapter.chap0.src.main.GamePanel;
 import chapter.chap1.GamePanel_chap1;
 import chapter.chap3.GamePanel_chap3;
@@ -67,17 +65,42 @@ public class MAIN {
 
     // Chuyển sang game mê cung
     public static void switchToMazeGame() {
+    // Xóa tất cả các thành phần hiện có trên frame
+    frame.getContentPane().removeAll();
+
+    // Tạo hiệu ứng SceneTransition với đoạn hội thoại
+    SceneTransition1 transition = new SceneTransition1(true); // Hiển thị đoạn hội thoại
+    transition.setMapChangeListener(() -> {
+        // Sau khi hiệu ứng kết thúc, chuyển sang màn hình game mê cung
         frame.getContentPane().removeAll();
-        GamePanel_chap3 mazeGame = new GamePanel_chap3();// Map mê cung
+
+        GamePanel_chap3 mazeGame = new GamePanel_chap3(); // Map mê cung
         frame.add(mazeGame);
+
         // Gắn callback để chuyển sang game đua xe
         mazeGame.setSceneChangeListener(() -> switchToRacingGame());
+
+        // Lấy quyền focus
         mazeGame.requestFocusInWindow();
+
         frame.revalidate();
         frame.repaint();
+    });
 
+    // Thêm hiệu ứng SceneTransition vào frame
+    frame.add(transition);
+    frame.revalidate();
+    frame.repaint();
+
+    // Bắt đầu hiệu ứng chuyển cảnh
+    transition.startTransition();
+
+    // Dừng game hiện tại
+    if (gamePanel != null) {
         gamePanel.stopGame();
     }
+}
+
 
     // Chuyển sang game đua xe
     public static void switchToRacingGame() {

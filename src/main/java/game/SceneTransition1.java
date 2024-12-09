@@ -9,16 +9,16 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class SceneTransition extends JPanel {
+public class SceneTransition1 extends JPanel {
     private float alpha = 0.0f; // Độ mờ (0.0 là trong suốt, 1.0 là tối hoàn toàn)
     private boolean isFadingIn = true; // Hiệu ứng fade-in
     private boolean isShowingDialog = false; // Hiển thị đoạn hội thoại
     private boolean showDialog = true; // Kiểm soát có hiển thị thoại hay không
     private String[] dialogLines = {
-        "Ôi, may quá chỉ là mơ",
-        "Cơ thể mình không bị sao cả",
-        "Tai nạn khủng khiếp thật",
-        "Không khác gì ngày hôm ấy"
+        "Thắng rồi !!!",
+        "Ra là mơ sao",
+        "Chưa gì đã sáng rồi",
+        "Lên lớp rồi ngủ tiếp vậy"
     };
     private int dialogIndex = 0; // Dòng hội thoại hiện tại
     private int dialogDisplayTime = 0; // Thời gian hiển thị dòng thoại
@@ -26,7 +26,7 @@ public class SceneTransition extends JPanel {
     private Timer timer; // Timer để điều khiển hiệu ứng
     private MapChangeListener mapChangeListener; // Callback để chuyển cảnh
 
-    public SceneTransition(boolean showDialog) {
+    public SceneTransition1(boolean showDialog) {
         this.showDialog = showDialog; // Gán giá trị để quyết định có hiển thị thoại không
         setOpaque(false); // Đảm bảo nền trong suốt
     }
