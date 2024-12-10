@@ -1,47 +1,89 @@
 package game;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
-import java.util.ArrayList;
+
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.Timer;
 
 public class StoryIntroAndTransition extends JPanel {
-    private Timer timer;
     private int index = 0; // Track the current part of the story
+    private int charIndex = 0; // Track the current character being displayed
     private float alpha = 0.0f; // Fade effect alpha
     private boolean isFadingIn = true;
+    private String displayedText = ""; // Text being displayed currently
+    private Timer typingTimer; // Timer for typing effect
     private boolean isStoryFinished = false;
     private boolean transitionComplete = false;  // Transition complete state
     private String[] storyParts = {
-        "Tôi là Đạt, một chàng trai từng được gọi là ‘con nhà người ta’ trong truyền thuyết. Cũng đúng thôi, tôi học giỏi, đẹp trai (đừng cười), lại còn ấp ủ giấc mơ trở thành sinh viên Đại học Bách Khoa – nơi toàn các thiên tài… hoặc là những người thích chịu cực hình.",
+        "Tôi là Đạt, một chàng trai từng được gọi là ‘con nhà người ta’ trong truyền thuyết.",
         
-        "Ngày xưa, tôi sống ở một thị trấn nhỏ yên bình, nơi tôi có cô bạn thân từ thuở ấu thơ, Linh. Cô ấy là kiểu người mà ai cũng muốn làm bạn: tốt bụng, thông minh, nhưng đôi khi hơi ‘mặn’ hơn cả muối biển. Chúng tôi đã có rất nhiều kỷ niệm đẹp cùng nhau – từ việc học bài đến… nghịch phá nhà hàng xóm (chuyện này đừng kể cho ai biết nhé!).",
+        "Tôi từng là con ngoan trò giỏi, là niềm kiêu hãnh của gia đình",
         
-        "Nhưng tuổi trẻ mà, đâu phải lúc nào cũng khôn ngoan. Tôi bị lôi kéo vào hội đua xe trái phép – tưởng oai phong lẫm liệt, nhưng thực ra chỉ là lũ trẻ trâu đội mũ bảo hiểm giả.",
+        "Và còn là sinh viên Đại học Bách Khoa – nơi toàn các thiên tài.",
+        
+        "Hồi nhỏ tôi có cô bạn thân tên là Linh",
+
+        "Linh xinh gái, tốt bụng, thông minh",
+        
+        "Chúng tôi lúc nào cũng dính lấy nhau từ việc học bài đến quậy phá",
+
+        "Tôi đã có tình cảm với cô ấy từ lúc nào không hay",
+        
+        "Nhưng tuổi trẻ mà, đâu phải lúc nào cũng khôn ngoan.",
+
+        "Lên Đại học, tôi bị lôi kéo vào hội đua xe trái phép",
+        
+        "tưởng oai phong lẫm liệt, nhưng thực ra chỉ là lũ trẻ trâu vô đạo đức.",
+
+        "Tôi đi đua xe ngày đêm mà không quan tâm đến an toàn của chính mình",
         
         "Đỉnh điểm là vào một đêm định mệnh, tôi đã gây tai nạn kinh hoàng...",
         
-        "Người bị tông… lại chính là mẹ của Linh. Lúc đó, tôi hoảng loạn đến mức bỏ trốn mà không kịp nghĩ gì. Nói thật, nếu có giải thưởng ‘người chạy nhanh nhất thị trấn’, chắc tôi đoạt giải luôn.",
+        "Người bị tông… lại chính là mẹ của Linh.",
         
-        "Sau đó, tôi bỏ lên thành phố. Tôi lao vào học hành, chơi game online để quên đi tất cả. Nhưng không, quá khứ như cái bumerang – ném đi bao nhiêu thì nó lại quay về đập vào mặt mình.",
+        "Lúc đó, tôi hoảng loạn đến mức bỏ trốn mà không kịp nghĩ gì. ",
         
-        "Đêm nào tôi cũng mơ thấy mình bị quái vật truy đuổi, hoặc bị một con xe máy không có tài xế đuổi theo. Rồi mỗi khi giật mình tỉnh dậy, tôi chỉ biết tự nhủ: ‘Chắc tại bài tập OOP của thầy Hóa khó quá nên bị ác mộng thôi.",
+        "Tôi không bị tóm, nhưng tôi không dám đi đầu thú, chỉ biết trốn chui trốn lủi trong nhà",
         
-        "Cứ thế, tôi từ một học sinh A+ OOP-trò cưng của thầy Hóa, trở thành ‘con nghiện cà phê và ác mộng’. Thế giới thực, tôi là người lủi thủi; trong thế giới ảo, tôi là ‘sát thủ đứng top server’. Nhưng sâu thẳm trong lòng, tôi biết mình đang chạy trốn – không chỉ khỏi lỗi lầm, mà còn khỏi chính bản thân mình.",
+        "Tôi lao vào học hành, chơi game để quên đi tất cả. ",
         
-        "Và giờ thì đây, tôi đang đứng trước ngưỡng cửa quan trọng nhất của cuộc đời. Liệu tôi có đủ dũng cảm để đối mặt với Linh, người bạn thân mà tôi đã làm tổn thương nhiều năm trước? Hay tôi sẽ mãi mãi là chàng trai mắc kẹt trong vòng xoáy của tội lỗi và nỗi sợ hãi? Tôi không biết, nhưng nếu đây là một game, chắc chắn tôi sẽ chọn chế độ chơi dễ…",
-        
-        "Hãy theo dõi hành trình của tôi để xem liệu tôi có tìm được câu trả lời. Và nếu bạn nghĩ mình sẽ cười được khi nghe câu chuyện này, thì đừng cố nhịn...",
-        
-        "Vì nếu bạn cười!",
-        
-        "Tôi sẽ được 10 OOP"
-    };
+        "Nhưng không, quá khứ như cái bumerang",
 
-    private String displayedText = "";  // Text to be displayed
-    private boolean isTextVisible = true;
+        "ném đi bao nhiêu thì nó lại quay về đập vào mặt mình.",
+        
+        "Đêm nào tôi cũng mơ thấy mình bị quái vật truy đuổi, ",
+        
+        "hoặc là giấc mơ về cái đêm kinh hoàng đó.",
+
+        "Giấc mơ quá chân thực làm tôi tưởng như mình đã quay ngược thời gian về lúc đó",
+        
+        "Rồi mỗi khi giật mình tỉnh dậy, tôi chỉ biết tự nhủ: ",
+
+        "Chắc tại bài tập OOP của thầy Hóa khó quá nên bị ác mộng thôi.",
+        
+        "Cứ thế, tôi từ một học sinh A+ OOP-trò cưng của thầy Hóa,",
+
+        "trở thành một đứa mất hồn, tinh thần lúc nào cũng hoảng loạn và chỉ biết vùi đầu vào game. ",
+
+        "Nhưng sâu thẳm trong lòng, tôi biết mình chỉ đang chạy trốn thực tại đen tối ",
+        
+        "Liệu tôi có đủ dũng cảm để đối mặt với sai lầm của mình ",
+
+        "Hay tôi sẽ mãi mãi là chàng trai mắc kẹt trong vòng xoáy của tội lỗi và nỗi sợ hãi? ",
+        
+        "Tôi không biết, nhưng nếu đây là một game, chắc chắn tôi sẽ chọn chế độ chơi dễ…",
+        
+        "Hãy theo dõi hành trình của tôi để xem liệu tôi có tìm được câu trả lời. ",    
+    };
 
     public StoryIntroAndTransition() {
         setPreferredSize(new Dimension(960, 540));
@@ -54,10 +96,19 @@ public class StoryIntroAndTransition extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (isStoryFinished) {
                     transitionComplete = true;  // Mark transition complete
+                } else if (charIndex < storyParts[index].length()) {
+                    // Skip typing effect and show full text
+                    charIndex = storyParts[index].length(); 
+                    displayedText = storyParts[index];
+                    repaint();
                 } else {
                     // Move to the next part of the story
                     index++;
-                    if (index == storyParts.length) {
+                    if (index < storyParts.length) {
+                        charIndex = 0;
+                        displayedText = "";
+                        startTypingEffect();
+                    } else {
                         isStoryFinished = true;
                     }
                     repaint();
@@ -67,29 +118,41 @@ public class StoryIntroAndTransition extends JPanel {
 
         startFadeEffect();
     }
+
     // Method to start the fade effect
     private void startFadeEffect() {
         SwingWorker<Void, Void> fadeWorker = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
+                // Fade in
                 while (alpha < 1.0f && !isStoryFinished) {
                     Thread.sleep(50); // Wait for a bit to create the fade effect
                     alpha += 0.05f;
                     repaint();
                 }
 
-                // Once fading in is done, start displaying the story
+                // Start typing first part
+                startTypingEffect();
+
+                // Wait for story to progress
                 while (index < storyParts.length) {
-                    Thread.sleep(3000);  // Wait for 3 seconds before moving to the next part of the story
-                    index++;
-                    repaint();
+                    Thread.sleep(1000000);  // Wait for 3 seconds before moving to the next part of the story
+                    if (charIndex == storyParts[index].length()) {
+                        index++;
+                        if (index < storyParts.length) {
+                            charIndex = 0;
+                            displayedText = "";
+                            startTypingEffect();
+                        }
+                    }
                 }
-                // Once the story is finished, fade out
+                // Fade out
                 while (alpha > 0.0f) {
                     Thread.sleep(50); // Wait for a bit to create the fade effect in reverse
                     alpha -= 0.05f;
                     repaint();
                 }
+
                 transitionComplete = true;  // Mark the transition as complete
                 return null;
             }
@@ -104,6 +167,24 @@ public class StoryIntroAndTransition extends JPanel {
         };
 
         fadeWorker.execute();  // Start the fade effect
+    }
+
+    // Method to start the typing effect
+    private void startTypingEffect() {
+        if (typingTimer != null && typingTimer.isRunning()) {
+            typingTimer.stop();
+        }
+
+        typingTimer = new Timer(20, e -> {
+            if (charIndex < storyParts[index].length()) {
+                displayedText += storyParts[index].charAt(charIndex);
+                charIndex++;
+                repaint();
+            } else {
+                typingTimer.stop();
+            }
+        });
+        typingTimer.start();
     }
 
     // Check if the transition is complete
@@ -124,27 +205,25 @@ public class StoryIntroAndTransition extends JPanel {
         // Draw the current part of the story
         if (index < storyParts.length) {
             g2d.setColor(Color.WHITE);
-            g2d.setFont(new Font("Serif", Font.PLAIN, 18));
-
-            String text = storyParts[index];
+            g2d.setFont(new Font("Serif", Font.PLAIN, 24));
             FontMetrics fm = g2d.getFontMetrics();
             int lineHeight = fm.getHeight();  // Get the height of each line
 
             // Calculate the width of the screen and center it
-            int x = 20;  // Set a small margin from the left edge
-            int y = getHeight() / 2 - (lineHeight * (text.split("\n").length / 2));  // Position the text vertically centered
+            int x = (getWidth() - fm.stringWidth(displayedText)) / 2;  // Small margin from left edge
+            int y = getHeight() / 2;  // Vertically center
 
-            String[] words = text.split(" ");  // Split the text into words
+            // Wrap text to fit screen width
+            String[] words = displayedText.split(" ");
             StringBuilder currentLine = new StringBuilder();
             int lineY = y;
 
-            // Iterate through each word to create the lines
             for (String word : words) {
                 String tempLine = currentLine + word + " ";
                 if (fm.stringWidth(tempLine) < getWidth() - 40) {  // Check if the line fits within the screen width
                     currentLine.append(word).append(" ");
                 } else {
-                    // Draw the current line and start a new one
+                    // Draw the current line
                     g2d.drawString(currentLine.toString(), x, lineY);
                     currentLine = new StringBuilder(word + " "); // Start a new line
                     lineY += lineHeight;

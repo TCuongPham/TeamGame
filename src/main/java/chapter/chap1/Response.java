@@ -8,7 +8,6 @@ public class Response {
         this.text = text;
         this.next = next;
     }
-
     public String getText() {
         return text;
     }
