@@ -387,7 +387,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
             "linh_answer_about_mother",
             "Là cậu sao? Tại sao hồi đó cậu lại bỏ chạy vậy?",
             List.of(
-                new Response("Lúc đó tớ quá hoảng sợ, cậu tha lỗi cho tớ nhé.", "linh_response_about_accident"),
+                new Response("Lúc đó tớ đã quá hoảng sợ, cậu tha lỗi cho tớ nhé.", "linh_response_about_accident"),
                 new Response("Tớ xin lỗi, cậu tha thứ cho tớ nhé.", "linh_response_about_accident")
             )
         ));
@@ -403,7 +403,7 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
 
         dialogues.add(new Dialogue(
             "linh_direct_confession0",
-            "Chuyên bay hôm đó gặp khủng bố, đâm vào tòa tháp đôi.",
+            "Chuyến bay hôm đó gặp khủng bố, đâm vào tòa tháp đôi.",
             List.of(
                 new Response("Vậy sao, thật là may quá.", "linh_direct_confession1"),
                 new Response("Tớ hiểu rồi. Cảm ơn cậu.", "linh_direct_confession1")

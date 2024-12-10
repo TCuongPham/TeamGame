@@ -5,8 +5,11 @@ import chapter.chap0.src.object.OBJ_Heart;
 import chapter.chap0.src.object.OBJ_Key;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -164,6 +167,15 @@ public class UI {
             g2.setColor(new Color(0,0,0));
             g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
 
+            BufferedImage menuImage;
+            try {
+                menuImage = ImageIO.read(new File("pic/menu.jpg")); // Đường dẫn đến hình ảnh
+                int imageX = -350;
+                int imageY = -280; // Hình ảnh nằm dưới tiêu đề
+                g2.drawImage(menuImage, imageX, imageY, null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             //TITLE NAME
             g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
             String text = "8th Year Student";
@@ -177,6 +189,7 @@ public class UI {
             //MAIN COLOR
             g2.setColor(Color.white);
             g2.drawString(text,x,y);
+
 
             //BLUE BOY
             x = gp.screenWidth/2 - (gp.tileSize*2)/2;
@@ -207,50 +220,7 @@ public class UI {
             x = getXforCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text,x,y);
-            /*if(commandNum == 2) {
-                g2.drawString(">",x-gp.tileSize,y);
-            }
-        } else if(titleScreenState == 1) {
-            g2.setColor(Color.white);
-            g2.setFont(g2.getFont().deriveFont(42F));
 
-            String text = "Select your class!";
-            int x = getXforCenteredText(text);
-            int y = gp.tileSize*3;
-            g2.drawString(text,x,y);
-
-            text = "Fighter";
-            x = getXforCenteredText(text);
-            y += gp.tileSize*3;
-            g2.drawString(text,x,y);
-            if(commandNum == 0) {
-                g2.drawString(">",x-gp.tileSize,y);
-            }
-
-            text = "Thief";
-            x = getXforCenteredText(text);
-            y += gp.tileSize;
-            g2.drawString(text,x,y);
-            if(commandNum == 1) {
-                g2.drawString(">",x-gp.tileSize,y);
-            }
-
-            text = "Sorcerer";
-            x = getXforCenteredText(text);
-            y += gp.tileSize;
-            g2.drawString(text,x,y);
-            if(commandNum == 2) {
-                g2.drawString(">",x-gp.tileSize,y);
-            }
-
-            text = "Back";
-            x = getXforCenteredText(text);
-            y += gp.tileSize*2;
-            g2.drawString(text,x,y);
-            if(commandNum == 3) {
-                g2.drawString(">",x-gp.tileSize,y);
-            }
-*/
         }
 
     }
@@ -316,12 +286,6 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Defense",textX,textY);
         textY += lineHeight;
-        /*g2.drawString("Exp",textX,textY);
-        textY += lineHeight;
-        g2.drawString("Next Level",textX,textY);
-        textY += lineHeight;
-        g2.drawString("Coin",textX,textY);
-        textY += lineHeight;*/
         g2.drawString("Weapon",textX,textY);
         textY += lineHeight;
         g2.drawString("Shield",textX,textY);
@@ -458,9 +422,9 @@ public class UI {
         int x;
         int y;
         String text;
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,110f));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,50f));
 
-        text = "Game Over";
+        text = "Bạn đã rơi vào giấc mơ vĩnh hằng";
 
         //SHADOW
         g2.setColor(Color.BLACK);
@@ -473,8 +437,8 @@ public class UI {
         g2.drawString(text,x-4,y-4);
 
         //Retry
-        g2.setFont(g2.getFont().deriveFont(50f));
-        text = "Retry";
+        g2.setFont(g2.getFont().deriveFont(30f));
+        text = "Thức dậy và ngủ tiếp";
         x = getXforCenteredText(text);
         y += gp.tileSize*3;
         g2.drawString(text,x,y);
@@ -483,8 +447,8 @@ public class UI {
         }
 
         //Quit
-        g2.setFont(g2.getFont().deriveFont(50f));
-        text = "Quit";
+        g2.setFont(g2.getFont().deriveFont(30f));
+        text = "Đăng xuất";
         x = getXforCenteredText(text);
         y += gp.tileSize*2;
         g2.drawString(text,x,y);
