@@ -309,125 +309,127 @@ public class GamePanel_chap1 extends JPanel implements Runnable, KeyListener {
         List<Dialogue> dialogues = new ArrayList<>();
         dialogues.add(new Dialogue(
             "linh_start",
-            "Đạt ơi! Là cậu phải không? Trông phế thế này, tớ không nhận ra luôn đấy!",
+            "Đạt, là cậu đấy à? Trông có vẻ kém quá, tớ không nhận ra luôn!",
             List.of(
-                new Response("Ơ, cậu là ai?", "linh_reveal_identity"),
-                new Response("Linh! Lâu rồi không gặp!", "linh_casual_response"),
-                new Response("Phế chỗ nào? Cậu nhìn lại mình đi!", "linh_tease_response")
+                new Response("Ơ, cậu là ai vậy?", "linh_reveal_identity"),
+                new Response("Kém chỗ nào? Cậu là ai mà nói thế?", "linh_reveal_identity")
             )
         ));
-
-        // Linh tiết lộ danh tính
         dialogues.add(new Dialogue(
             "linh_reveal_identity",
             "Tớ là Linh đây, bạn cũ của cậu. Quên tớ rồi à?",
             List.of(
-                new Response("À, chào Linh! Lâu rồi không gặp.", "linh_continue_casual"),
-                new Response("Haha, quên sao được. Dạo này cậu sao rồi?", "linh_ask_about_life")
+                new Response("À, chào Linh! Lâu rồi không gặp.", "linh_continue_casual1"),
+                new Response("Haha, làm sao mà quên được. Dạo này cậu thế nào?", "linh_continue_casual1")
             )
         ));
-
-        // Đạt trêu Linh về vẻ ngoài
         dialogues.add(new Dialogue(
-            "linh_tease_response",
-            "Xấu? Xấu nhưng đầy cá tính! Khác với cậu, trông như cây tre trăm đốt bị vứt ra đồng!",
+            "linh_continue_casual1",
+            "Tớ vẫn khỏe, dạo này học hành thế nào, mình cùng lớp OOP này mà!",
             List.of(
-                new Response("Thôi, không đùa nữa. Dạo này cậu thế nào?", "linh_ask_about_life")
+                new Response("Ngon rồi, lại được làm bạn đồng hành như xưa.", "linh_continue_casual2"),
+                new Response("Dạo này hơi mệt mỏi chút xíu!", "linh_continue_casual2")
             )
         ));
 
         // Linh tiếp tục câu chuyện
         dialogues.add(new Dialogue(
-            "linh_casual_response",
-            "Tớ biết thế nào cậu cũng đỗ vào Bách Khoa mà, nên tớ cũng đăng ký vào đây. Cậu thấy sao, được học cùng tớ thích không?",
+            "linh_continue_casual2",
+            "Ừ, trông cậu hơi mệt đấy.",
             List.of(
-                new Response("Tuyệt vời! Lại được làm bạn đồng hành như xưa.", "linh_continue_casual"),
-                new Response("Sợ cậu đuổi kịp tớ sao? Haha!", "linh_competitive_joke")
+                new Response("Mệt lắm à, dạo này tớ hay gặp ác mộng.", "linh_continue_casual3"),
+                new Response("Vấn đề tâm lý một chút thôi mà!", "linh_continue_casual3")
             )
         ));
 
         // Linh phản ứng khi Đạt đùa cạnh tranh
         dialogues.add(new Dialogue(
-            "linh_competitive_joke",
-            "Đuổi kịp? Tớ chỉ cần đi bộ cũng vượt cậu đấy! Thế dạo này cậu thế nào?",
+            "linh_continue_casual3",
+            "Tâm lý à, tớ mới học qua khóa tâm lý học của thầy Cường đây, kể tớ nghe xem sao.",
             List.of(
-                new Response("Không tốt lắm, tớ thường gặp ác mộng.", "linh_talk_about_nightmares"),
-                new Response("Cũng ổn, nhưng mẹ cậu thế nào rồi?", "linh_ask_about_mother")
+                new Response("Vì chuyện cũ ngày xưa ấy mà.", "linh_talk_about_nightmares"),
+                new Response("Tớ bị ám ảnh bởi quá khứ, từng gây tai nạn đấy.", "linh_talk_about_nightmares")
             )
         ));
 
         // Tiếp tục hội thoại thân thiện
         dialogues.add(new Dialogue(
-            "linh_continue_casual",
-            "Nhưng trông cậu không vui lắm nhỉ? Có chuyện gì sao?",
+            "linh_talk_about_nightmares",
+            "Nhưng cụ thể là như thế nào, mơ thấy OOP bị tạch à hay sao?",
             List.of(
-                new Response("Không có gì đâu, tớ chỉ khó ngủ thôi.", "linh_talk_about_nightmares"),
-                new Response("Thực ra... tớ muốn kể với cậu một chuyện.", "linh_direct_confession")
+                new Response("Tớ hay mơ thấy những con quái vật đuổi theo, bắt tớ phải chạy liên tục.", "linh_direct_confession"),
+                new Response("Tớ mơ lại giấc mơ về tai nạn ngày xưa, mọi thứ quá chân thật khiến tớ hoảng sợ.", "linh_direct_confession")
             )
         ));
 
         // Hội thoại về ác mộng
         dialogues.add(new Dialogue(
-            "linh_talk_about_nightmares",
-            "Ác mộng á? Mơ thấy gì? Quái vật? Hay là tạch OOP?",
+            "linh_direct_confession",
+            "Nghe ghê quá vậy, chắc là cậu đang gặp áp lực lớn đấy.",
             List.of(
-                new Response("Mơ thấy bị quái vật truy đuổi.", "linh_suggest_psychologist"),
-                new Response("Mơ thấy bị tai nạn xe máy.", "linh_ask_about_mother")
+                new Response("Mẹ cậu bây giờ khỏe rồi chứ? Ngày xưa cô ấy bị tai nạn mà.", "linh_ask_about_mother"),
+                new Response("Còn mẹ cậu thế nào, lâu rồi tớ chưa qua chơi nhà nữa.", "linh_ask_about_mother")
             )
         ));
 
         // Linh gợi ý gặp bác sĩ tâm lý
         dialogues.add(new Dialogue(
-            "linh_suggest_psychologist",
-            "Cậu nên đi gặp bác sĩ tâm lý đấy! Đừng để quái vật đuổi trong giấc mơ rồi chuyển sang đời thật!",
+            "linh_ask_about_mother",
+            "Mẹ tớ bây giờ khỏe rồi, nhưng tớ vẫn ghét đứa gây ra tai nạn hồi đó lắm.",
             List.of(
-                new Response("Haha, cảm ơn. Nhưng mẹ cậu thế nào rồi?", "linh_ask_about_mother"),
-                new Response("Thực ra... tớ muốn nói một điều quan trọng.", "linh_direct_confession")
+                new Response("...Vậy à.Nếu đứa đó là tớ thì cậu có giận không", "linh_answer_about_mother"),
+                new Response("Thực ra, chính tớ là người gây ra tai nạn đó. Tớ xin lỗi.", "linh_answer_about_mother")
             )
         ));
 
         // Linh phản ứng về mẹ
         dialogues.add(new Dialogue(
-            "linh_ask_about_mother",
-            "À, mẹ tớ ổn rồi. Chỉ bị gãy chân, giờ khỏi hẳn. Nhưng hồi đó tớ giận kẻ gây tai nạn lắm.",
+            "linh_answer_about_mother",
+            "Là cậu sao? Tại sao hồi đó cậu lại bỏ chạy vậy?",
             List.of(
-                new Response("Cậu có còn giận người đó không?", "linh_response_about_accident"),
-                new Response("Thực ra, tớ muốn thú nhận một chuyện.", "linh_direct_confession")
+                new Response("Lúc đó tớ quá hoảng sợ, cậu tha lỗi cho tớ nhé.", "linh_response_about_accident"),
+                new Response("Tớ xin lỗi, cậu tha thứ cho tớ nhé.", "linh_response_about_accident")
             )
         ));
 
         // Linh phản ứng về tai nạn
         dialogues.add(new Dialogue(
             "linh_response_about_accident",
-            "Ban đầu thì có, nhưng giờ thì không. Nếu không vì tai nạn đó, mẹ tớ đã không bỏ chuyến bay gặp khủng bố hôm ấy rồi...",
+            "Thực ra, tớ cũng thầm cảm ơn tai nạn đó. ",
             List.of(
-                new Response("Thực ra, tớ là người gây ra tai nạn đó.", "linh_direct_confession"),
-                new Response("Tớ hiểu. Cảm ơn cậu đã kể.", "linh_talk_about_feelings")
+                new Response("Tại sao vậy ?", "linh_direct_confession0")
             )
         ));
 
-        // Đạt tỏ tình
         dialogues.add(new Dialogue(
-            "linh_talk_about_feelings",
-            "Thực ra, Linh... ngoài chuyện đó, tớ còn muốn nói một điều. Tớ đã thích cậu từ lâu rồi.",
+            "linh_direct_confession0",
+            "Chuyên bay hôm đó gặp khủng bố, đâm vào tòa tháp đôi.",
             List.of(
-                new Response("Linh phản ứng thế nào?", "linh_response_to_love")
+                new Response("Vậy sao, thật là may quá.", "linh_direct_confession1"),
+                new Response("Tớ hiểu rồi. Cảm ơn cậu.", "linh_direct_confession1")
+            )
+        ));
+        dialogues.add(new Dialogue(
+            "linh_direct_confession1",
+            "Thôi, dù sao cậu cũng là bạn thân của tớ mà, bỏ qua đi. Lên thư viện ngồi học một chút nhé.",
+            List.of(
+                new Response("Còn có một chuyện tớ muốn nói với cậu.", "linh_response_to_love")
             )
         ));
 
         // Linh đồng ý
         dialogues.add(new Dialogue(
             "linh_response_to_love",
-            "Tớ cũng thích cậu lâu rồi, Đạt. Nhưng giờ cậu cần ổn định tâm lý trước đã, sau đó chúng ta sẽ nói chuyện nhiều hơn, được chứ?",
+            "Chuyện gì nữa vậy?",
             List.of(
-                new Response("Tớ đồng ý. Cảm ơn cậu, Linh.", "end_game")
+                new Response("Tớ thích cậu từ lâu rồi, nhưng chưa có dịp thổ lộ với cậu !", "end_game")
             )
         ));
 
         // Kết thúc game
         dialogues.add(new Dialogue(
             "end_game",
-            "Đạt trở về quê, nhận lỗi với gia đình Linh, tỏ tình thành công, và bắt đầu cuộc sống mới đầy hy vọng. Cuối cùng, cậu đã vượt qua ám ảnh quá khứ và tìm thấy tình yêu.",
+            "Đồ ngốc này, tớ cũng thích cậu từ lâu rồi mà, hihihi.",
             List.of()
         ));
         return dialogues;
